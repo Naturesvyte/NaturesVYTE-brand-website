@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – NaturesVYTE</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="images/logo.png" alt="NaturesVYTE Logo"></div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div id="mobile-menu">&#9776;</div>
+    </nav>
+  </header>
+
+  <section class="contact">
+    <h1>Contact Us</h1>
+    <form id="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="contact-msg"></p>
+  </section>
+
+  <footer>
+    <p>© 2025 NaturesVYTE. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const contactForm = document.getElementById('contact-form');
+    const contactMsg = document.getElementById('contact-msg');
+    if(contactForm){
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = contactForm.querySelector('input[type="text"]').value;
+        contactMsg.textContent = `Thank you, ${name}! Your message has been received.`;
+        contactForm.reset();
+      });
+    }
+  </script>
+  <script src="js/script.js"></script>
+</body>
+</html>
