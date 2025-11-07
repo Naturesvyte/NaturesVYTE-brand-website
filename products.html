@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products – NaturesVYTE</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="images/logo.png" alt="NaturesVYTE Logo"></div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div id="mobile-menu">&#9776;</div>
+    </nav>
+  </header>
+
+  <section class="products-page">
+    <h1>Our Products</h1>
+    <div class="products-grid">
+      <div class="product-card">
+        <img src="images/product1.jpg" alt="Vitamin Boost">
+        <h3>Vitamin Boost</h3>
+        <p>$29.99 – Essential vitamins to start your day right.</p>
+        <button class="btn add-to-cart" data-name="Vitamin Boost" data-price="29.99" data-price-id="PRICE_ID_VITAMIN">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/product2.jpg" alt="Immunity Plus">
+        <h3>Immunity Plus</h3>
+        <p>$39.99 – Strengthen your immunity naturally.</p>
+        <button class="btn add-to-cart" data-name="Immunity Plus" data-price="39.99" data-price-id="PRICE_ID_IMMUNITY">Add to Cart</button>
+      </div>
+      <!-- Add more products here -->
+    </div>
+  </section>
+
+  <section class="shopping-cart">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="cart-total">0.00</span></p>
+    <button class="btn" id="checkout-btn">Checkout</button>
+  </section>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
