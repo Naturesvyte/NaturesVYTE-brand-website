@@ -62,7 +62,7 @@
         }
 
         .header-main img {
-            height: 50px; /* Logo size for top left corner */
+            height: 50px; 
         }
 
         .nav-links a {
@@ -100,6 +100,15 @@
             margin-bottom: 20px;
             line-height: 1.05;
         }
+        
+        /* New styling for VYTE highlighted letters */
+        .highlight {
+            color: var(--color-accent);
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(233, 255, 112, 0.8);
+            margin-right: -4px; /* Optional: pull the letter closer to the period */
+        }
+        /* End of new styling */
 
         .hero-subhead {
             color: var(--color-accent);
@@ -355,7 +364,12 @@
     <section class="hero">
         <div class="hero-content">
             <p class="hero-subhead">BACKED BY SCIENCE, INSPIRED BY NATURE</p>
-            <h1>VYTE: VITALITY. YOUTH. TECHNOLOGY. ENERGY.</h1>
+            <h1>
+                <span class="highlight">V</span>ITALITY. 
+                <span class="highlight">Y</span>OUTH. 
+                <span class="highlight">T</span>ECHNOLOGY. 
+                <span class="highlight">E</span>NERGY.
+            </h1>
             <p>We blend **cutting-edge bioscience** with the **purest natural extracts**. Fuel your modern life with supplements that are clean, effective, and ethically sourced.</p>
             <a href="products.html" class="btn">Explore Our Synergy</a>
         </div>
