@@ -151,26 +151,27 @@
             box-shadow: 0 5px 15px rgba(0, 119, 182, 0.4);
         }
 
-        /* Logo Placeholder */
+        /* Logo Display Area */
         .hero-visual {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 400px;
-            /* Placeholder for the complex logo visualization */
-            background: rgba(26, 147, 111, 0.1); 
-            border-radius: 50%;
-            border: 3px solid var(--color-primary);
-            box-shadow: 0 0 50px rgba(233, 255, 112, 0.3);
             position: relative;
         }
         
-        .logo-placeholder-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--color-accent);
-            text-shadow: 0 0 10px rgba(233, 255, 112, 0.5);
+        .hero-visual img {
+            max-width: 90%;
+            height: auto;
+            /* Applying a subtle glow to match the Gen-Z/Scientific aesthetic */
+            filter: drop-shadow(0 0 20px rgba(233, 255, 112, 0.4));
+            transition: transform 0.5s;
         }
+        
+        .hero-visual img:hover {
+            transform: scale(1.05);
+        }
+
 
         /* New Section: Trust & Quality Bar */
         .trust-bar {
@@ -322,7 +323,9 @@
             .hero-visual {
                 min-height: 250px;
                 margin-top: 40px;
-                border-radius: 12px; /* Square off the visual */
+            }
+            .hero-visual img {
+                max-width: 60%; 
             }
             .keyword-strip {
                 gap: 20px;
@@ -369,9 +372,9 @@
             <p>We blend **cutting-edge bioscience** with the **purest natural extracts**. Fuel your modern life with supplements that are clean, effective, and ethically sourced. **Owned by Women.**</p>
             <a href="products.html" class="btn">Explore Our Synergy</a>
         </div>
-        <div class="hero-visual" role="img" aria-label="Nature's VYTE Complex Logo Visualization">
-            <p class="logo-placeholder-text">Nature's VYTE Logo Visualization</p>
-            </div>
+        <div class="hero-visual" role="img" aria-label="Nature's VYTE Complex Logo">
+            <img src="images/logo.png" alt="Nature's VYTE Premium Scientific Logo">
+        </div>
     </section>
     
     <section class="trust-bar">
