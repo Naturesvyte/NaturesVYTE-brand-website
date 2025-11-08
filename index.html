@@ -1,47 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NaturesVYTE – Natural Supplements for Modern Living. Explore clean, science-backed nutrition for energy, focus, and wellness.">
-  <title>NaturesVYTE | Natural Supplements for Modern Living</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="images/logo.png">
-  <style>
-    /* TEMPORARY STYLING for demo */
-    body {font-family: Arial, sans-serif; margin: 0; padding: 0;}
-    header {display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
-    header img {height: 60px;}
-    nav a {margin: 0 15px; text-decoration: none; color: #333; font-weight: 600;}
-    nav a:hover {color: #3c8d40;}
-    .hero {background: linear-gradient(to right, #e3f8e3, #d0f0d0); text-align: center; padding: 100px 20px;}
-    .hero h1 {font-size: 2.8rem; color: #2c662d;}
-    .hero p {font-size: 1.2rem; margin: 20px auto; max-width: 600px;}
-    .btn {background-color: #3c8d40; color: white; padding: 12px 28px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none;}
-    .btn:hover {background-color: #347b39;}
-    footer {text-align: center; padding: 30px; background: #f5f5f5; color: #555; margin-top: 60px;}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NaturesVYTE – Backed by Science, Inspired by Nature. Explore natural, clean, science-backed nutrition for peak energy, focus, and holistic wellness.">
+    <title>Nature's VYTE | Pure. Potent. Proven.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <style>
+        /* =========================================================
+        CORE MODERN STYLING: Premium, Scientific, Gen-Z Vibe 
+        =========================================================
+        */
+
+        :root {
+            /* Biophilic (Nature) Colors */
+            --color-primary: #1A936F; /* Deep Forest Green */
+            --color-secondary: #0077B6; /* Scientific Blue/Cyan */
+            --color-accent: #E9FF70; /* Neon/Gen-Z Green */
+            /* Dark Mode Palette */
+            --color-bg: #1A1A2E; /* Deep Navy/Scientific Background */
+            --color-text: #EAEAEA;
+            --color-card-bg: rgba(45, 45, 75, 0.4); /* Dark Glassmorphism */
+            --shadow-subtle: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            --border-glass: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Light Mode Switch (Optional but modern) */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --color-bg: #F0F4F8; /* Light Sky Blue/Gray */
+                --color-text: #1A1A2E;
+                --color-card-bg: rgba(255, 255, 255, 0.7); /* Light Glassmorphism */
+                --shadow-subtle: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+                --border-glass: 1px solid rgba(0, 0, 0, 0.05);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        /* Header/Navigation */
+        .header-main {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5vw;
+            background: var(--color-card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-subtle);
+            border-bottom: var(--border-glass);
+        }
+
+        .header-main img {
+            height: 40px; 
+        }
+
+        .nav-links a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+            text-shadow: 0 0 5px var(--color-accent); 
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            min-height: 85vh;
+            padding: 5vh 5vw;
+            background: radial-gradient(circle at top left, #2b4c6e 0%, var(--color-bg) 60%); 
+        }
+
+        .hero-content {
+            padding-right: 40px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-subhead {
+            color: var(--color-accent);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 500px;
+            margin-bottom: 30px;
+            font-weight: 300;
+            opacity: 0.85;
+        }
+
+        /* CTA Button */
+        .btn {
+            background-color: var(--color-primary);
+            color: var(--color-bg); 
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 119, 182, 0.4);
+        }
+
+        /* Logo Placeholder */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            /* Placeholder for the complex logo visualization */
+            background: rgba(26, 147, 111, 0.1); 
+            border-radius: 50%;
+            border: 3px solid var(--color-primary);
+            box-shadow: 0 0 50px rgba(233, 255, 112, 0.3);
+            position: relative;
+        }
+        
+        .logo-placeholder-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            text-shadow: 0 0 10px rgba(233, 255, 112, 0.5);
+        }
+
+        /* New Section: Trust & Quality Bar */
+        .trust-bar {
+            padding: 40px 5vw;
+            background: linear-gradient(90deg, #163653, #1A1A2E, #163653);
+            text-align: center;
+        }
+
+        .trust-bar h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--color-accent);
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+        }
+
+        .keyword-strip {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .keyword-strip span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .keyword-strip span::after {
+            content: '•';
+            color: var(--color-secondary);
+            margin-left: 20px;
+        }
+        .keyword-strip span:last-child::after {
+            content: '';
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quality-item {
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            padding: 15px;
+            background: var(--color-card-bg);
+            border-radius: 8px;
+            border: var(--border-glass);
+            display: flex;
+            align-items: center;
+            color: var(--color-text);
+        }
+
+        .quality-item .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--color-accent);
+        }
+
+        .certification-logos {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        
+        .certification-logos img {
+            height: 45px; /* Size for certification logos */
+            opacity: 0.9;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            padding: 80px 5vw;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--color-card-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: var(--border-glass);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 5vw;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--color-text);
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 50px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                min-height: auto;
+            }
+            .hero-content {
+                padding-right: 0;
+            }
+            .hero-visual {
+                min-height: 250px;
+                margin-top: 40px;
+                border-radius: 12px; /* Square off the visual */
+            }
+            .keyword-strip {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            .keyword-strip span::after {
+                content: ''; /* Remove bullet point on mobile */
+                margin-left: 0;
+            }
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .header-main {
+                padding: 10px 4vw;
+            }
+            .nav-links {
+                display: none; 
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <a href="index.html"><img src="images/logo.png" alt="NaturesVYTE Logo"></a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+    <header class="header-main">
+        <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="science.html">Science</a>
+            <a href="community.html">Community</a>
+            <a href="contact.html" class="btn">Shop Now</a>
+        </nav>
+    </header>
 
-  <section class="hero">
-    <h1>Nature Meets Science</h1>
-    <p>Empowering modern lifestyles with pure, effective, and natural supplements. Experience the synergy of clean nutrition with NaturesVYTE.</p>
-    <a href="products.html" class="btn">Explore Products</a>
-  </section>
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subhead">BACKED BY SCIENCE, INSPIRED BY NATURE</p>
+            <h1>VYTE: VITALITY. YOUTH. TECHNOLOGY. ENERGY.</h1>
+            <p>We blend **cutting-edge bioscience** with the **purest natural extracts**. Fuel your modern life with supplements that are clean, effective, and ethically sourced. **Owned by Women.**</p>
+            <a href="products.html" class="btn">Explore Our Synergy</a>
+        </div>
+        <div class="hero-visual" role="img" aria-label="Nature's VYTE Complex Logo Visualization">
+            <p class="logo-placeholder-text">Nature's VYTE Logo Visualization</p>
+            </div>
+    </section>
+    
+    <section class="trust-bar">
+        <h2>Our Commitment: **Pure. Potent. Proven. Natural.**</h2>
+        
+        <div class="keyword-strip">
+            <span>PURE</span>
+            <span>POTENT</span>
+            <span>PROVEN</span>
+        </div>
 
-  <footer>
-    <p>© 2025 NaturesVYTE. All rights reserved.</p>
-  </footer>
+        <div class="quality-grid">
+            <div class="quality-item"><span class="icon">🧬</span> Clinically Formulated</div>
+            <div class="quality-item"><span class="icon">🏭</span> Made in FDA-Registered Facility</div>
+            <div class="quality-item"><span class="icon">✅</span> Third-Party Tested for Purity</div>
+            <div class="quality-item"><span class="icon">🌱</span> 100% Natural Ingredients</div>
+        </div>
+
+        <div class="certification-logos">
+            <img src="images/cert-kosher.png" alt="Kosher Certified">
+            <img src="images/cert-halal.png" alt="Halal Certified">
+            <img src="images/cert-organic.png" alt="Organic Certified">
+            <img src="images/cert-gmp.png" alt="GMP Certified Facility">
+            <img src="images/cert-non-gmo.png" alt="Non-GMO Project Verified">
+            <img src="images/cert-gluten-free.png" alt="Gluten-Free Certified">
+        </div>
+    </section>
+
+    <section class="feature-grid">
+        <div class="feature-card">
+            <div class="card-icon">🧪</div>
+            <h3>Pure Bioscience</h3>
+            <p>Third-party tested formulas. No fillers, no junk. Just clinically effective doses.</p>
+        </div>
+        <div class="feature-card">
+            <div class="card-icon">🌿</div>
+            <h3>Sustainable Source</h3>
+            <p>Ethically harvested, plant-based power. Good for you, great for the planet.</p>
+        </div>
+        <div class="feature-card">
+            <div class="card-icon">⚡</div>
+            <h3>Gen-Z Optimized</h3>
+            <p>Designed for peak focus, energy, and rapid recovery in fast-paced modern life.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Nature's VYTE © 2025. **Backed by Science, Inspired by Nature**. Owned by Women.</p>
+    </footer>
 </body>
 </html>
