@@ -112,14 +112,14 @@
         .hero-subhead {
             color: var(--color-accent);
             font-family: 'IBM Plex Mono', monospace; 
-            /* Reduced letter spacing for single-line fit on desktop */
-            font-size: 0.9rem; 
-            letter-spacing: 4px; 
+            /* FINAL ADJUSTMENTS for single line: Smaller font and zero letter spacing */
+            font-size: 0.8rem; 
+            letter-spacing: 0; 
             text-transform: uppercase;
             margin-bottom: 10px;
             white-space: nowrap; /* Prevents wrapping on desktop */
             overflow: hidden; 
-            text-overflow: ellipsis;
+            text-overflow: clip; /* Ensure no "..." shows up */
         }
 
         .hero p {
@@ -360,7 +360,7 @@
             .hero h1 {
                 font-size: 2.5rem;
             }
-            /* Allow subhead wrapping on mobile */
+            /* Ensure subhead wraps cleanly on mobile */
             .hero-subhead {
                 white-space: normal;
                 letter-spacing: 3px;
