@@ -112,10 +112,15 @@
         .hero-subhead {
             color: var(--color-accent);
             font-family: 'IBM Plex Mono', monospace; 
-            font-size: 1rem;
-            letter-spacing: 4px;
+            /* Reduced font size slightly to fit on one line */
+            font-size: 0.9rem; 
+            /* Increased letter spacing for style */
+            letter-spacing: 5px; 
             text-transform: uppercase;
             margin-bottom: 10px;
+            white-space: nowrap; /* Prevents wrapping on desktop */
+            overflow: hidden; 
+            text-overflow: ellipsis;
         }
 
         .hero p {
@@ -160,7 +165,6 @@
         .hero-visual img {
             max-width: 90%;
             height: auto;
-            /* Using drop-shadow is better for PNGs/SVGs on dark backgrounds */
             filter: drop-shadow(0 0 25px rgba(233, 255, 112, 0.6));
             transition: transform 0.5s;
         }
@@ -181,12 +185,12 @@
             font-family: 'IBM Plex Mono', monospace;
             color: var(--color-primary);
             margin-bottom: 35px;
-            /* Reduced font size slightly to force the long text onto one line on desktop */
-            font-size: 1.6rem; 
+            /* REDUCED FONT SIZE to ensure full text visibility on one line */
+            font-size: 1.4rem; 
             letter-spacing: 1px;
-            white-space: nowrap; /* Optional: prevents wrapping unless container is too small */
-            overflow: hidden; /* Optional: hides overflow if white-space: nowrap is used */
-            text-overflow: ellipsis; /* Optional: show ellipsis if it is hidden */
+            white-space: nowrap; 
+            overflow: hidden; 
+            /* Removed text-overflow: ellipsis; just in case it's interfering, we rely on size now */
         }
 
         .keyword-strip {
@@ -257,11 +261,9 @@
         }
         
         .certification-logos img {
-            /* Set a standard height for all certification logos */
             height: 50px; 
             opacity: 0.85;
             transition: opacity 0.3s;
-            /* Filter to make logos look uniform on dark background if they are grayscale/white */
             filter: grayscale(10%); 
         }
         .certification-logos img:hover {
@@ -308,11 +310,10 @@
 
         /* Responsive Adjustments */
         @media (max-width: 1100px) {
-            /* Ensure the Trust Bar heading wraps cleanly on smaller desktops */
+            /* Allow wrapping for the long commitment heading on smaller screens */
             .trust-bar h2 {
                 font-size: 1.5rem;
-                white-space: normal; /* Allow wrapping */
-                text-overflow: clip; 
+                white-space: normal;
             }
         }
         @media (max-width: 900px) {
@@ -360,6 +361,13 @@
             }
             .hero h1 {
                 font-size: 2.5rem;
+            }
+            /* Allow subhead wrapping on mobile */
+            .hero-subhead {
+                white-space: normal;
+                letter-spacing: 3px;
+                font-size: 0.8rem;
+                text-overflow: clip;
             }
         }
     </style>
