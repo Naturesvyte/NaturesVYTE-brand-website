@@ -62,7 +62,7 @@
         }
 
         .header-main img {
-            height: 50px; 
+            height: 50px; /* Logo size for top left corner */
         }
 
         .nav-links a {
@@ -101,14 +101,13 @@
             line-height: 1.05;
         }
         
-        /* New styling for VYTE highlighted letters */
+        /* Styling for VYTE highlighted letters */
         .highlight {
             color: var(--color-accent);
             font-weight: 900;
             text-shadow: 0 0 10px rgba(233, 255, 112, 0.8);
-            margin-right: -4px; /* Optional: pull the letter closer to the period */
+            margin-right: -4px; 
         }
-        /* End of new styling */
 
         .hero-subhead {
             color: var(--color-accent);
@@ -161,6 +160,7 @@
         .hero-visual img {
             max-width: 90%;
             height: auto;
+            /* Using drop-shadow is better for PNGs/SVGs on dark backgrounds */
             filter: drop-shadow(0 0 25px rgba(233, 255, 112, 0.6));
             transition: transform 0.5s;
         }
@@ -181,8 +181,12 @@
             font-family: 'IBM Plex Mono', monospace;
             color: var(--color-primary);
             margin-bottom: 35px;
-            font-size: 1.8rem;
+            /* Reduced font size slightly to force the long text onto one line on desktop */
+            font-size: 1.6rem; 
             letter-spacing: 1px;
+            white-space: nowrap; /* Optional: prevents wrapping unless container is too small */
+            overflow: hidden; /* Optional: hides overflow if white-space: nowrap is used */
+            text-overflow: ellipsis; /* Optional: show ellipsis if it is hidden */
         }
 
         .keyword-strip {
@@ -253,12 +257,16 @@
         }
         
         .certification-logos img {
+            /* Set a standard height for all certification logos */
             height: 50px; 
             opacity: 0.85;
             transition: opacity 0.3s;
+            /* Filter to make logos look uniform on dark background if they are grayscale/white */
+            filter: grayscale(10%); 
         }
         .certification-logos img:hover {
             opacity: 1;
+            filter: grayscale(0);
         }
 
         /* Feature Cards */
@@ -299,6 +307,14 @@
 
 
         /* Responsive Adjustments */
+        @media (max-width: 1100px) {
+            /* Ensure the Trust Bar heading wraps cleanly on smaller desktops */
+            .trust-bar h2 {
+                font-size: 1.5rem;
+                white-space: normal; /* Allow wrapping */
+                text-overflow: clip; 
+            }
+        }
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -332,7 +348,7 @@
                 gap: 15px;
             }
             .footer-right {
-                order: -1; /* Move Women-Owned to top on mobile */
+                order: -1; 
             }
         }
         @media (max-width: 600px) {
@@ -395,12 +411,12 @@
         </div>
 
         <div class="certification-logos">
-            <img src="images/cert-kosher.png" alt="Kosher Certified">
-            <img src="images/cert-halal.png" alt="Halal Certified">
-            <img src="images/cert-organic.png" alt="Organic Certified">
-            <img src="images/cert-gmp.png" alt="GMP Certified Facility">
-            <img src="images/cert-non-gmo.png" alt="Non-GMO Project Verified">
-            <img src="images/cert-gluten-free.png" alt="Gluten-Free Certified">
+            <img src="images/cert-kosher-official.png" alt="Kosher Certified Official Logo">
+            <img src="images/cert-halal-official.png" alt="Halal Certified Official Logo">
+            <img src="images/cert-organic-official.png" alt="Organic Certified Official Logo">
+            <img src="images/cert-gmp-official.png" alt="GMP Certified Facility Official Logo">
+            <img src="images/cert-non-gmo-official.png" alt="Non-GMO Project Verified Official Logo">
+            <img src="images/cert-gluten-free-official.png" alt="Gluten-Free Certified Official Logo">
         </div>
     </section>
 
