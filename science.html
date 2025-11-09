@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The science behind Nature's VYTE. Learn about our clinical research, third-party testing, and clean formulation philosophy.">
+    <title>Science | Nature's VYTE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <style>
+        /* --- CORE MODERN STYLING (Shared CSS) --- */
+        :root {
+            --color-primary: #1A936F; 
+            --color-secondary: #0077B6; 
+            --color-accent: #E9FF70; 
+            --color-bg: #111827; 
+            --color-text: #EAEAEA;
+            --color-card-bg: rgba(30, 41, 59, 0.5); 
+            --shadow-subtle: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--color-bg); color: var(--color-text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        /* Header/Navigation */
+        .header-main { position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 15px 5vw; background: var(--color-card-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: var(--shadow-subtle); border-bottom: var(--border-glass); }
+        .header-main img { height: 50px; }
+        .nav-links { list-style: none; display: flex; align-items: center; }
+        .nav-links a { margin-left: 30px; text-decoration: none; color: var(--color-text); font-weight: 500; letter-spacing: 0.5px; transition: color 0.3s, text-shadow 0.3s; }
+        .nav-links a:hover { color: var(--color-accent); text-shadow: 0 0 8px var(--color-accent); }
+
+        /* CTA Button Styling */
+        .btn { background-color: var(--color-primary); color: var(--color-bg); padding: 10px 25px; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; display: inline-block; }
+        .btn:hover { background-color: var(--color-secondary); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 119, 182, 0.5); }
+        
+        /* Footer */
+        footer { padding: 30px 5vw; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.15); color: var(--color-text); font-size: 0.85rem; margin-top: auto; }
+
+        /* --- SCIENCE PAGE SPECIFIC STYLES --- */
+        .science-page { padding: 80px 5vw; max-width: 1200px; margin: 0 auto; flex-grow: 1; }
+        .science-page h1 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 3.5rem; color: var(--color-text); margin-bottom: 5px; text-align: center; }
+        .science-page h2 { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; color: var(--color-accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 50px; text-align: center; }
+        
+        .science-section { margin-bottom: 60px; padding: 30px; border-radius: 8px; background: var(--color-card-bg); border: var(--border-glass); box-shadow: var(--shadow-subtle); }
+        .science-section h3 { font-size: 2rem; color: var(--color-primary); margin-bottom: 15px; border-left: 4px solid var(--color-accent); padding-left: 15px; }
+        .science-section p { margin-bottom: 20px; font-size: 1.1rem; }
+        .science-section ul { list-style-type: none; padding-left: 0; }
+        .science-section li { margin-bottom: 10px; padding-left: 25px; position: relative; font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; }
+        .science-section li::before { content: '→'; color: var(--color-accent); position: absolute; left: 0; font-weight: bold; }
+
+        .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
+        .trust-card { background: rgba(0, 119, 182, 0.1); padding: 25px; border-radius: 6px; border: 1px solid var(--color-secondary); text-align: center; }
+        .trust-card strong { color: var(--color-accent); font-size: 1.2rem; display: block; margin-bottom: 5px; }
+
+        /* Mobile Menu */
+        #mobile-menu { display: none; font-size: 2rem; cursor: pointer; color: var(--color-accent); }
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; background: var(--color-card-bg); padding: 10px 0; margin-top: 10px; }
+            .nav-links.active { display: flex; }
+            #mobile-menu { display: block; }
+            .science-page h1 { font-size: 2.5rem; }
+            .trust-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-main">
+        <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="science.html">Science</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html" class="btn">Shop Now</a></li>
+            </ul>
+            <div id="mobile-menu">&#9776;</div>
+        </nav>
+    </header>
+
+    <section class="science-page">
+        <h1>SCIENCE IN SYNERGY</h1>
+        <h2>CLINICALLY BACKED. NATURALLY INSPIRED.</h2>
+
+        <div class="science-section">
+            <h3>Our Formulation Philosophy: Bio-Purity</h3>
+            <p>
+                At **Nature's VYTE**, we reject guesswork. Every ingredient is selected based on rigorous **clinical data** demonstrating efficacy, bioavailability, and safety. Our goal is to synthesize the power of nature with cutting-edge **bioscience** to create formulas that truly deliver results, not just promises.
+            </p>
+            <p>
+                We focus on **clean, measurable dosages** and high-purity extracts, ensuring your body receives the exact biological signal it needs for optimal performance, recovery, and longevity.
+            </p>
+        </div>
+
+        <div class="science-section">
+            <h3>The Transparency Protocol: Trust Built on Proof</h3>
+            <p>We believe in radical transparency. Our manufacturing standards go beyond industry requirements to secure your trust and the purity of our products:</p>
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <strong>Third-Party Tested</strong>
+                    <p>Independent lab verification ensures the label matches the bottle, guaranteeing purity and potency.</p>
+                </div>
+                <div class="trust-card">
+                    <strong>GMP Certified Facility</strong>
+                    <p>Made in FDA-registered facilities adhering to the highest Good Manufacturing Practices (GMP) standards.</p>
+                </div>
+                <div class="trust-card">
+                    <strong>Targeted Bioavailability</strong>
+                    <p>Formulations optimized for maximum absorption, ensuring the active ingredients are effective where they're needed most.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="science-section">
+            <h3>Key Ingredients & Research Focus</h3>
+            <p>Our two flagship products demonstrate our commitment to science:</p>
+            <ul>
+                <li>**MegaCreatine:** Utilizes micronized Creatine Monohydrate, the most studied supplement for strength, paired with electrolytes for improved cellular hydration and muscle response.</li>
+                <li>**Women's Health:** Features botanicals like Ashwagandha (for cortisol balance) and specialized B-Vitamin complexes, chosen for their established roles in hormonal health and energy metabolism in female physiology.</li>
+            </ul>
+            <p style="margin-top: 30px;">
+                Ready to feel the difference science-backed supplements make? 
+                <a href="products.html" class="btn">Shop Our Tested Formulas</a>
+            </p>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>Nature's VYTE © 2025. Science in Synergy.</p>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
