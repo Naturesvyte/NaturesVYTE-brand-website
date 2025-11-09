@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NaturesVYTE – Backed by Science, Inspired by Nature. Explore natural, clean, science-backed nutrition for peak energy, focus, and holistic wellness.">
-    <title>Nature's VYTE | Pure. Potent. Proven.</title>
+    <meta name="description" content="Nature's VYTE: Backed by Science, Inspired by Nature. Pure, potent supplements for peak performance and modern vitality.">
+    <title>Nature's VYTE – Science in Synergy</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="css/style.css"> 
     <link rel="icon" type="image/png" href="images/logo.png">
 
     <style>
         /* =========================================================
-        CORE MODERN STYLING: Premium, Scientific, Gen-Z Vibe 
+        CORE STYLING & VARIABLES
         =========================================================
         */
-
         :root {
-            /* Biophilic (Nature) Colors */
+            /* Colors */
             --color-primary: #1A936F; /* Deep Forest Green */
             --color-secondary: #0077B6; /* Scientific Blue/Cyan */
             --color-accent: #E9FF70; /* Neon/Gen-Z Green */
@@ -42,10 +41,15 @@
             background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.6;
-            transition: background-color 0.5s, color 0.5s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Header/Navigation */
+        /* =========================================================
+        HEADER & NAVIGATION
+        =========================================================
+        */
         .header-main {
             position: sticky;
             top: 0;
@@ -62,9 +66,15 @@
         }
 
         .header-main img {
-            height: 50px; /* Logo size for top left corner */
+            height: 50px; 
         }
 
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        
         .nav-links a {
             margin-left: 30px;
             text-decoration: none;
@@ -79,71 +89,21 @@
             text-shadow: 0 0 8px var(--color-accent); 
         }
 
-        /* Hero Section */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            min-height: 85vh;
-            padding: 5vh 5vw;
-            background: radial-gradient(circle at 10% 10%, #1c3d59 0%, var(--color-bg) 60%); 
-        }
-
-        .hero-content {
-            padding-right: 40px;
-        }
-
-        .hero h1 {
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 3.8rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1.05;
-        }
-        
-        /* Styling for VYTE highlighted letters */
-        .highlight {
-            color: var(--color-accent);
-            font-weight: 900;
-            text-shadow: 0 0 10px rgba(233, 255, 112, 0.8);
-            margin-right: -4px; 
-        }
-
-        .hero-subhead {
-            color: var(--color-accent);
-            font-family: 'IBM Plex Mono', monospace; 
-            /* FINAL ADJUSTMENTS for single line: Smaller font and zero letter spacing */
-            font-size: 0.8rem; 
-            letter-spacing: 0; 
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            white-space: nowrap; /* Prevents wrapping on desktop */
-            overflow: hidden; 
-            text-overflow: clip; /* Ensure no "..." shows up */
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 500px;
-            margin-bottom: 30px;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-
-        /* CTA Button */
+        /* CTA Button Styling */
         .btn {
             background-color: var(--color-primary);
             color: var(--color-bg); 
-            padding: 15px 35px;
+            padding: 10px 25px; 
             border: none;
             border-radius: 4px; 
             cursor: pointer;
             font-weight: 700;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
         }
 
         .btn:hover {
@@ -152,221 +112,179 @@
             box-shadow: 0 8px 20px rgba(0, 119, 182, 0.5);
         }
 
-        /* Logo Display Area (Main Hero Image) */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 400px;
-            position: relative;
-        }
-        
-        .hero-visual img {
-            max-width: 90%;
-            height: auto;
-            filter: drop-shadow(0 0 25px rgba(233, 255, 112, 0.6));
-            transition: transform 0.5s;
-        }
-        
-        .hero-visual img:hover {
-            transform: scale(1.05);
-        }
-
-
-        /* Trust & Quality Bar */
-        .trust-bar {
-            padding: 60px 5vw;
-            background: linear-gradient(90deg, #1f2937, var(--color-bg), #1f2937);
-            text-align: center;
-        }
-
-        .trust-bar h2 {
-            font-family: 'IBM Plex Mono', monospace;
-            color: var(--color-primary);
-            margin-bottom: 35px;
-            /* Font size for single line commitment */
-            font-size: 1.4rem; 
-            letter-spacing: 1px;
-            white-space: nowrap; 
-            overflow: hidden; 
-        }
-
-        .keyword-strip {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-bottom: 40px;
-        }
-
-        .keyword-strip span {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
+        /* Mobile Menu */
+        #mobile-menu {
+            display: none; 
+            font-size: 2rem;
+            cursor: pointer;
             color: var(--color-accent);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            position: relative;
-            text-shadow: 0 0 10px rgba(233, 255, 112, 0.5);
-        }
-        
-        .keyword-strip span::after {
-            content: '—'; 
-            color: var(--color-secondary);
-            margin-left: 25px;
-            font-weight: 400;
-        }
-        .keyword-strip span:last-child::after {
-            content: '';
         }
 
-        .quality-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-            max-width: 1200px;
+        /* =========================================================
+        HERO SECTION
+        =========================================================
+        */
+        .hero { 
+            height: 80vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+            /* Placeholder: Use a dark background image or a gradient */
+            background: linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)), url('images/hero-bg-placeholder.jpg') no-repeat center center/cover;
+            border-bottom: 2px solid var(--color-primary);
+        }
+        .hero-content { max-width: 800px; padding: 0 20px; }
+        .hero h1 { 
+            font-size: 4rem; 
+            font-weight: 900; 
+            margin-bottom: 15px; 
+            color: var(--color-accent); 
+            text-shadow: 0 0 15px rgba(233, 255, 112, 0.6); /* Enhanced glow */
+        }
+        .hero p { 
+            font-size: 1.5rem; 
+            margin-bottom: 30px; 
+            font-weight: 300; 
+        }
+
+        /* =========================================================
+        TRUST BAR (Quick Credibility)
+        =========================================================
+        */
+        .trust-bar {
+            background-color: var(--color-secondary);
+            color: var(--color-bg);
+            padding: 15px 5vw;
+            text-align: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            border-top: 5px solid var(--color-accent);
+            border-bottom: 5px solid var(--color-accent);
+            
+        }
+        .trust-bar span {
+            margin: 5px 15px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .trust-bar strong {
+            color: var(--color-bg); 
+            margin-right: 5px;
+        }
+        /* Style the checkmark emoji */
+        .trust-bar span::before {
+            content: '✓ ';
+            color: var(--color-accent); /* Green checkmark */
+            font-weight: 900;
+        }
+
+        /* =========================================================
+        FEATURED PRODUCTS SECTION
+        =========================================================
+        */
+        .features-section { 
+            padding: 80px 5vw; /* Increased padding since video is removed */
+            text-align: center; 
+        }
+
+        .features-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        .features-section p {
+            font-size: 1rem;
+            margin-bottom: 40px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .quality-item {
-            font-size: 0.95rem;
-            font-family: 'IBM Plex Mono', monospace;
-            font-weight: 400;
-            text-align: left;
-            padding: 18px;
-            background: var(--color-card-bg);
-            border-radius: 6px;
-            border: var(--border-glass);
-            display: flex;
-            align-items: center;
-            color: var(--color-text);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .quality-item .icon {
-            font-size: 1.5rem;
-            margin-right: 12px;
-            color: var(--color-accent);
-        }
-
-        .certification-logos {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-        
-        .certification-logos img {
-            height: 50px; 
-            opacity: 0.85;
-            transition: opacity 0.3s;
-            filter: grayscale(10%); 
-        }
-        .certification-logos img:hover {
-            opacity: 1;
-            filter: grayscale(0);
-        }
-
-        /* Feature Cards */
-        .feature-grid {
-            padding: 80px 5vw;
+        .featured-products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 50px auto;
         }
-        
-        /* Footer */
+
+        .product-preview {
+            background: var(--color-card-bg);
+            border: var(--border-glass);
+            border-radius: 8px;
+            padding: 25px;
+            transition: box-shadow 0.3s;
+        }
+        .product-preview:hover {
+            box-shadow: 0 0 20px rgba(0, 119, 182, 0.4);
+        }
+        .product-preview img {
+            width: 100%;
+            max-width: 150px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 8px rgba(233, 255, 112, 0.3));
+        }
+        .product-preview h4 {
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            margin-bottom: 10px;
+        }
+        .product-preview p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* =========================================================
+        FOOTER
+        =========================================================
+        */
         footer {
             padding: 30px 5vw;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             background: rgba(0, 0, 0, 0.15);
             color: var(--color-text);
             font-size: 0.85rem;
-        }
-        
-        .footer-left p {
-            opacity: 0.6;
-        }
-        
-        .footer-right {
-            /* Women-Owned Brand Tag (Upper Right Footer) */
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--color-primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 5px 10px;
-            border: 1px solid var(--color-primary);
-            border-radius: 4px;
-            background: rgba(26, 147, 111, 0.1);
+            margin-top: auto; 
         }
 
-
-        /* Responsive Adjustments */
-        @media (max-width: 1100px) {
-            /* Allow wrapping for the long commitment heading on smaller screens */
-            .trust-bar h2 {
-                font-size: 1.5rem;
-                white-space: normal;
-            }
-        }
-        @media (max-width: 900px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                min-height: auto;
-            }
-            .hero-content {
-                padding-right: 0;
-            }
-            .hero-visual {
-                min-height: 250px;
-                margin-top: 40px;
-            }
-            .hero-visual img {
-                max-width: 60%; 
-            }
-            .keyword-strip {
-                gap: 20px;
-                flex-wrap: wrap;
-            }
-            .keyword-strip span::after {
-                content: ''; 
-                margin-left: 0;
-            }
-            .quality-grid {
-                grid-template-columns: 1fr;
-            }
-            footer {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
-            .footer-right {
-                order: -1; 
-            }
-        }
-        @media (max-width: 600px) {
+        /* =========================================================
+        MEDIA QUERIES (Responsiveness)
+        =========================================================
+        */
+        @media (max-width: 768px) {
             .header-main {
-                padding: 10px 4vw;
+                flex-wrap: wrap;
             }
             .nav-links {
                 display: none; 
+                width: 100%;
+                flex-direction: column;
+                background: var(--color-card-bg);
+                padding: 10px 0;
+                margin-top: 10px;
             }
-            .hero h1 {
-                font-size: 2.5rem;
+            .nav-links.active {
+                display: flex;
             }
-            /* Ensure subhead wraps cleanly on mobile */
-            .hero-subhead {
-                white-space: normal;
-                letter-spacing: 3px;
-                font-size: 0.8rem;
-                text-overflow: clip;
+            .nav-links li {
+                margin: 10px 0;
             }
+            #mobile-menu {
+                display: block;
+            }
+            .hero { height: 60vh; }
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1.2rem; }
+            .trust-bar { justify-content: space-between; }
+            .trust-bar span { margin: 5px 0; width: 48%; }
         }
     </style>
 </head>
@@ -374,83 +292,66 @@
 <body>
     <header class="header-main">
         <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="science.html">Science</a>
-            <a href="community.html">Community</a>
-            <a href="contact.html" class="btn">Shop Now</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li> 
+                <li><a href="products.html">Products</a></li>
+                <li><a href="science.html">Science</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html" class="btn">Shop Now</a></li>
+            </ul>
+            <div id="mobile-menu">&#9776;</div>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <p class="hero-subhead">BACKED BY SCIENCE, INSPIRED BY NATURE</p>
-            <h1>
-                <span class="highlight">V</span>ITALITY. 
-                <span class="highlight">Y</span>OUTH. 
-                <span class="highlight">T</span>ECHNOLOGY. 
-                <span class="highlight">E</span>NERGY.
-            </h1>
-            <p>We blend **cutting-edge bioscience** with the **purest natural extracts**. Fuel your modern life with supplements that are clean, effective, and ethically sourced.</p>
-            <a href="products.html" class="btn">Explore Our Synergy</a>
-        </div>
-        <div class="hero-visual" role="img" aria-label="Nature's VYTE Complex Logo">
-            <img src="images/logo.png" alt="Nature's VYTE Premium Scientific Logo">
+            <h1>VYTE: VITALITY, SYNTHESIZED.</h1>
+            <p>Unlocking peak potential through pure, science-backed formulas. Woman-owned and revolutionizing wellness.</p>
+            <a href="products.html" class="btn" style="padding: 15px 35px; font-size: 1.1rem;">Explore Formulas →</a>
         </div>
     </section>
-    
-    <section class="trust-bar">
-        <h2>THE FUTURE IS BIOPHILIC: Harnessing Earth’s Purity for Modern Vitality.</h2>
+
+    <div class="trust-bar">
+        <span><strong>Lab Verified:</strong> Third-Party Tested</span>
+        <span><strong>Purity:</strong> Non-GMO & Gluten Free</span>
+        <span><strong>Standards:</strong> GMP Certified Facility</span>
+        <span><strong>Mission:</strong> Woman-Owned Business</span>
+    </div>
+
+    <section class="features-section">
+        <h3>FUEL YOUR POTENTIAL</h3>
+        <p>Explore our two flagship formulas, designed for targeted results backed by clinical research and high-purity sourcing.</p>
+
+        <div class="featured-products-grid">
+            <div class="product-preview">
+                <img src="images/megacreatine.jpg" alt="MegaCreatine">
+                <h4>MegaCreatine</h4>
+                <p>Maximum power, peak strength, and neurological support. Pure micronized creatine for rapid absorption.</p>
+                <a href="products.html" class="btn">View Product</a>
+            </div>
+
+            <div class="product-preview">
+                <img src="images/womens-health.jpg" alt="Women's Health Formula">
+                <h4>Women's Health</h4>
+                <p>Targeted support for hormonal balance, bone density, and sustained energy for female vitality.</p>
+                <a href="products.html" class="btn">View Product</a>
+            </div>
+        </div>
         
-        <div class="keyword-strip">
-            <span>PURE</span>
-            <span>POTENT</span>
-            <span>PROVEN</span>
-        </div>
-
-        <div class="quality-grid">
-            <div class="quality-item"><span class="icon">🧬</span> Clinically Formulated</div>
-            <div class="quality-item"><span class="icon">🏭</span> Made in FDA-Registered Facility</div>
-            <div class="quality-item"><span class="icon">✅</span> Third-Party Tested for Purity</div>
-            <div class="quality-item"><span class="icon">🌱</span> Made with natural ingredients</div>
-        </div>
-
-        <div class="certification-logos">
-            <img src="images/cert-kosher-official.png" alt="Kosher Certified Official Logo">
-            <img src="images/cert-halal-official.png" alt="Halal Certified Official Logo">
-            <img src="images/cert-organic-official.png" alt="Organic Certified Official Logo">
-            <img src="images/cert-gmp-official.png" alt="GMP Certified Facility Official Logo">
-            <img src="images/cert-non-gmo-official.png" alt="Non-GMO Project Verified Official Logo">
-            <img src="images/cert-gluten-free-official.png" alt="Gluten-Free Certified Official Logo">
-        </div>
-    </section>
-
-    <section class="feature-grid">
-        <div class="feature-card">
-            <div class="card-icon">🧪</div>
-            <h3>Pure Bioscience</h3>
-            <p>Third-party tested formulas. No fillers, no junk. Just clinically effective doses.</p>
-        </div>
-        <div class="feature-card">
-            <div class="card-icon">🌿</div>
-            <h3>Sustainable Source</h3>
-            <p>Ethically harvested, plant-based power. Good for you, great for the planet.</p>
-        </div>
-        <div class="feature-card">
-            <div class="card-icon">⚡</div>
-            <h3>Gen-Z Optimized</h3>
-            <p>Designed for peak focus, energy, and rapid recovery in fast-paced modern life.</p>
-        </div>
+        <a href="products.html" class="btn" style="padding: 15px 40px; font-size: 1rem;">View All Formulas</a>
     </section>
 
     <footer>
-        <div class="footer-left">
-            <p>Nature's VYTE © 2025. Backed by Science, Inspired by Nature.</p>
-        </div>
-        <div class="footer-right">
-            Women-Owned Brand
-        </div>
+        <p>Nature's VYTE © 2025. Backed by Science, Inspired by Nature.</p>
     </footer>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
