@@ -1,52 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products – NaturesVYTE</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nature's VYTE Products: MegaCreatine and Women's Health formulas. Pure, potent, and proven supplements.">
+    <title>Products | Nature's VYTE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <style>
+        /* =========================================================
+        CORE MODERN STYLING (Pulled from index.html)
+        =========================================================
+        */
+        :root {
+            /* Biophilic (Nature) Colors */
+            --color-primary: #1A936F; /* Deep Forest Green */
+            --color-secondary: #0077B6; /* Scientific Blue/Cyan */
+            --color-accent: #E9FF70; /* Neon/Gen-Z Green */
+            /* Dark Mode Palette */
+            --color-bg: #111827; /* Near Black/Scientific Background */
+            --color-text: #EAEAEA;
+            --color-card-bg: rgba(30, 41, 59, 0.5); /* Dark Glassmorphism */
+            --shadow-subtle: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header/Navigation (Aligned with index.html) */
+        .header-main {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5vw;
+            background: var(--color-card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-subtle);
+            border-bottom: var(--border-glass);
+        }
+
+        .header-main img {
+            height: 50px; 
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+            text-shadow: 0 0 8px var(--color-accent); 
+        }
+
+        /* CTA Button Styling */
+        .btn {
+            background-color: var(--color-primary);
+            color: var(--color-bg); 
+            padding: 10px 25px; /* Slightly smaller button for product cards */
+            border: none;
+            border-radius: 4px; 
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 119, 182, 0.5);
+        }
+
+        /* Product Page Layout */
+        .products-page {
+            flex-grow: 1; /* Allows content to take up remaining space */
+            padding: 80px 5vw;
+            text-align: center;
+        }
+
+        .products-page h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: var(--color-text);
+            margin-bottom: 10px;
+        }
+
+        .products-page h2 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            color: var(--color-accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Product Card Styling (Glassmorphism) */
+        .product-card {
+            background: var(--color-card-bg);
+            border: var(--border-glass);
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+        }
+
+        .product-card img {
+            width: 100%;
+            max-width: 200px; /* Standardize product image size */
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            /* Added a subtle shadow consistent with the brand style */
+            filter: drop-shadow(0 0 10px rgba(233, 255, 112, 0.3));
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-accent);
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: var(--color-text);
+        }
+
+        /* Shopping Cart Section Styling */
+        .shopping-cart {
+            padding: 40px 5vw;
+            background: rgba(0, 0, 0, 0.3); /* Darker background for the cart area */
+            border-top: var(--border-glass);
+            text-align: center;
+        }
+
+        .shopping-cart h2 {
+            color: var(--color-primary);
+            font-family: 'IBM Plex Mono', monospace;
+            margin-bottom: 20px;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+            color: var(--color-text);
+        }
+
+        /* Footer (Simple footer matching index.html vibe) */
+        footer {
+            padding: 30px 5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.15);
+            color: var(--color-text);
+            font-size: 0.85rem;
+            margin-top: auto; /* Ensures footer sticks to the bottom */
+        }
+        
+        /* Mobile Menu (Hidden on Desktop) */
+        #mobile-menu {
+            display: none; 
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-accent);
+        }
+        
+        @media (max-width: 768px) {
+            .header-main {
+                flex-wrap: wrap;
+                padding: 10px 5vw;
+            }
+            .nav-links {
+                display: none; /* Hide standard nav */
+                width: 100%;
+                flex-direction: column;
+                background: var(--color-card-bg);
+                padding: 10px 0;
+                margin-top: 10px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+            #mobile-menu {
+                display: block;
+            }
+            .products-page h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo"><img src="images/logo.png" alt="NaturesVYTE Logo"></div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div id="mobile-menu">&#9776;</div>
-    </nav>
-  </header>
+    <header class="header-main">
+        <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="science.html">Science</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html" class="btn">Shop Now</a></li>
+            </ul>
+            <div id="mobile-menu">&#9776;</div>
+        </nav>
+    </header>
 
-  <section class="products-page">
-    <h1>Our Products</h1>
-    <div class="products-grid">
-      <div class="product-card">
-        <img src="images/product1.jpg" alt="Vitamin Boost">
-        <h3>Vitamin Boost</h3>
-        <p>$29.99 – Essential vitamins to start your day right.</p>
-        <button class="btn add-to-cart" data-name="Vitamin Boost" data-price="29.99" data-price-id="PRICE_ID_VITAMIN">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <img src="images/product2.jpg" alt="Immunity Plus">
-        <h3>Immunity Plus</h3>
-        <p>$39.99 – Strengthen your immunity naturally.</p>
-        <button class="btn add-to-cart" data-name="Immunity Plus" data-price="39.99" data-price-id="PRICE_ID_IMMUNITY">Add to Cart</button>
-      </div>
-      <!-- Add more products here -->
-    </div>
-  </section>
+    <section class="products-page">
+        <h1>OUR VYTE FORMULAS</h1>
+        <h2>PURE. POTENT. PROVEN.</h2>
+        
+        <div class="products-grid">
+            
+            <div class="product-card">
+                <img src="images/megacreatine.jpg" alt="Nature's VYTE MegaCreatine">
+                <h3>MegaCreatine</h3>
+                <p>
+                    **Maximum Power Formula.** Optimized blend for superior muscle recovery, peak strength, and neurological support. Pure, micronized, and highly bioavailable.
+                </p>
+                <button class="btn add-to-cart" data-name="MegaCreatine" data-price="49.99" data-price-id="PRICE_ID_CREATINE">Buy Now $49.99</button>
+            </div>
+            
+            <div class="product-card">
+                <img src="images/womens-health.jpg" alt="Nature's VYTE Women's Health Formula">
+                <h3>Women's Health</h3>
+                <p>
+                    **Hormonal Balance & Energy.** A synergistic blend targeting bone density, mood stability, and sustained energy for modern female vitality.
+                </p>
+                <button class="btn add-to-cart" data-name="Women's Health" data-price="54.99" data-price-id="PRICE_ID_WOMENS">Buy Now $54.99</button>
+            </div>
 
-  <section class="shopping-cart">
-    <h2>Your Cart</h2>
-    <ul id="cart-items"></ul>
-    <p>Total: $<span id="cart-total">0.00</span></p>
-    <button class="btn" id="checkout-btn">Checkout</button>
-  </section>
+        </div>
+    </section>
 
-  <script src="https://js.stripe.com/v3/"></script>
-  <script src="js/script.js"></script>
+    <section class="shopping-cart">
+        <h2>YOUR CART</h2>
+        <ul id="cart-items">
+            </ul>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button class="btn" id="checkout-btn">Checkout</button>
+    </section>
+
+    <footer>
+        <p>Nature's VYTE © 2025. Pure. Potent. Proven.</p>
+    </footer>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="js/script.js"></script>
+    
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
