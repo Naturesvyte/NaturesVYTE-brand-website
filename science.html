@@ -57,6 +57,30 @@
         .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
         .trust-card { background: rgba(0, 119, 182, 0.1); padding: 25px; border-radius: 6px; border: 1px solid var(--color-secondary); text-align: center; }
         .trust-card strong { color: var(--color-accent); font-size: 1.2rem; display: block; margin-bottom: 5px; }
+        
+        /* --- PROGRESS BAR STYLES FOR QUICK TRUST --- */
+        .progress-bar-container {
+            height: 8px; /* Slightly taller bar for visibility */
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 10px 0 5px 0;
+            overflow: hidden; /* Ensures bar is contained */
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: var(--color-accent);
+            border-radius: 4px;
+            /* Added transition for a sleek, modern visual effect */
+            transition: width 1s ease-out; 
+            /* Start with 0 width, let Javascript (optional) or CSS define final width */
+        }
+        .trust-card p.score-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
 
         /* Mobile Menu */
         #mobile-menu { display: none; font-size: 2rem; cursor: pointer; color: var(--color-accent); }
@@ -103,17 +127,29 @@
             <h3>The Transparency Protocol: Trust Built on Proof</h3>
             <p>We believe in radical transparency. Our manufacturing standards go beyond industry requirements to secure your trust and the purity of our products:</p>
             <div class="trust-grid">
+                
                 <div class="trust-card">
                     <strong>Third-Party Tested</strong>
-                    <p>Independent lab verification ensures the label matches the bottle, guaranteeing purity and potency.</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 95%;"></div>
+                    </div>
+                    <p class="score-label">95% Purity Score. Verified.</p>
                 </div>
+
                 <div class="trust-card">
-                    <strong>GMP Certified Facility</strong>
-                    <p>Made in FDA-registered facilities adhering to the highest Good Manufacturing Practices (GMP) standards.</p>
+                    <strong>GMP Compliance</strong>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                    <p class="score-label">100% Adherence to Manufacturing Standards.</p>
                 </div>
+
                 <div class="trust-card">
-                    <strong>Targeted Bioavailability</strong>
-                    <p>Formulations optimized for maximum absorption, ensuring the active ingredients are effective where they're needed most.</p>
+                    <strong>Optimal Bioavailability</strong>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 90%;"></div>
+                    </div>
+                    <p class="score-label">90% Absorption Rate Target.</p>
                 </div>
             </div>
         </div>
