@@ -1,5 +1,5 @@
 // =========================================================
-// Nature's VYTE: Shopping Cart Logic (script.js)
+// Nature's VYTE: Shopping Cart Logic (script.js) - UPDATED FOR LOCALSTORAGE
 // =========================================================
 
 // 1. CORE DATA STRUCTURES
@@ -9,18 +9,32 @@ const products = [
     { id: 2, name: "Women's Health Formula", price: 42.99, image: "images/womens-health.jpg" }
 ];
 
-// Cart initialized as an empty array
 let cart = []; 
 
 // =========================================================
-// 2. PRODUCT RENDERING
-// Assumes a container on products.html with id="product-list"
+// 2. LOCAL STORAGE UTILITY
+// =========================================================
+function saveCart() {
+    // Save the current state of the cart to browser's local storage
+    localStorage.setItem('vyteCart', JSON.stringify(cart));
+}
+
+function loadCart() {
+    const savedCart = localStorage.getItem('vyteCart');
+    if (savedCart) {
+        // Overwrite the empty 'cart' array with the saved data
+        cart = JSON.parse(savedCart);
+    }
+}
+
+// =========================================================
+// 3. PRODUCT RENDERING (Only runs on products.html)
 // =========================================================
 function renderProducts() {
     const productList = document.getElementById('product-list');
     if (!productList) return;
 
-    // Map through the products array to create the HTML structure for each card
+    // ... (Product rendering code is the same) ...
     productList.innerHTML = products.map(product => `
         <div class="product-card">
             <img src="${product.image}" alt="${product.name}">
@@ -33,14 +47,13 @@ function renderProducts() {
         </div>
     `).join('');
 
-    // Attach event listeners to the 'Add to Cart' buttons
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', handleAddToCart);
     });
 }
 
 // =========================================================
-// 3. CART MANAGEMENT
+// 4. CART MANAGEMENT & RENDERING
 // =========================================================
 function handleAddToCart(event) {
     const productId = parseInt(event.target.dataset.id);
@@ -50,10 +63,8 @@ function handleAddToCart(event) {
         const existingItem = cart.find(item => item.id === productId);
 
         if (existingItem) {
-            // Increment quantity if product already exists
             existingItem.quantity++;
         } else {
-            // Add new item to cart
             cart.push({
                 id: product.id,
                 name: product.name,
@@ -62,40 +73,46 @@ function handleAddToCart(event) {
             });
         }
         
+        // IMPORTANT: Save the cart state after modification
+        saveCart(); 
+        
         // Visual feedback to the user
         event.target.textContent = 'Added! ✓';
-        event.target.disabled = true; // Disable button briefly
+        event.target.disabled = true;
         setTimeout(() => {
             event.target.textContent = 'Add to Cart';
             event.target.disabled = false;
         }, 800);
 
-        renderCart(); 
+        // Render both possible cart views (products.html and checkout.html)
+        renderCart('cart-items', 'cart-total');
     }
 }
 
-// Renders the cart items and updates the total in the cart sidebar
-// Assumes a container on products.html with id="cart-items"
-// Assumes a span on products.html with id="cart-total"
-function renderCart() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalElement = document.getElementById('cart-total');
+function renderCart(itemsContainerId, totalElementId) {
+    const cartItemsContainer = document.getElementById(itemsContainerId);
+    const cartTotalElement = document.getElementById(totalElementId);
 
     if (!cartItemsContainer || !cartTotalElement) return;
 
     // 1. Render items
     if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="empty-cart-message">Your vitality sync is pending. Add a formula!</p>';
+        cartItemsContainer.innerHTML = `<p class="empty-cart-message">
+            ${itemsContainerId === 'cart-items' ? 'Your vitality sync is pending. Add a formula!' : 'Your cart is empty. Please return to the shop.'}
+        </p>`;
     } else {
-        cartItemsContainer.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <span class="item-name">${item.name}</span>
-                <div class="item-controls">
+        cartItemsContainer.innerHTML = cart.map(item => {
+            const isCheckout = itemsContainerId === 'summary-items';
+            
+            // Rendered HTML changes slightly based on the page (products.html vs checkout.html)
+            return `
+                <div class="${isCheckout ? 'summary-item' : 'cart-item'}">
+                    <span class="item-name">${item.name}</span>
                     <span class="item-qty">x${item.quantity}</span>
+                    <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
                 </div>
-                <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     // 2. Calculate and render total
@@ -104,10 +121,22 @@ function renderCart() {
 }
 
 // =========================================================
-// 4. INITIALIZATION
+// 5. INITIALIZATION
 // =========================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Start the process when the page is fully loaded
-    renderProducts(); 
-    renderCart();
+    // 1. Always load the cart state first
+    loadCart();
+
+    // 2. Check which page we are on and render the specific views
+    const isProductsPage = document.getElementById('product-list');
+    const isCheckoutPage = document.getElementById('summary-items');
+
+    if (isProductsPage) {
+        renderProducts(); // Render product cards only on products.html
+        renderCart('cart-items', 'cart-total'); // Render cart sidebar
+    }
+
+    if (isCheckoutPage) {
+        renderCart('summary-items', 'checkout-total'); // Render checkout summary
+    }
 });
