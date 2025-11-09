@@ -67,7 +67,7 @@
         }
         
         /* =========================================================
-        HEADER & NAVIGATION (Consistent across all pages)
+        HEADER & NAVIGATION
         =========================================================
         */
         .header-main {
@@ -174,7 +174,7 @@
             padding: 25px;
             box-shadow: var(--shadow-subtle);
             position: sticky;
-            top: 80px; /* Offset from sticky header */
+            top: 80px; 
             height: fit-content;
         }
         .cart-sidebar h3 {
@@ -240,7 +240,7 @@
 
 
         /* =========================================================
-        FOOTER (Consistent)
+        FOOTER
         =========================================================
         */
         footer {
@@ -260,7 +260,7 @@
         */
         @media (max-width: 1000px) {
             .main-content-grid {
-                grid-template-columns: 2fr 1fr; /* Adjust ratio slightly */
+                grid-template-columns: 2fr 1fr;
             }
         }
         
@@ -291,13 +291,14 @@
                 padding: 30px 4vw;
             }
             .cart-sidebar {
-                position: static; /* Unstick the cart sidebar on mobile */
+                position: static; 
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- 1. Header: Navigation Bar -->
     <header class="header-main">
         <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
         <nav>
@@ -307,43 +308,53 @@
                 <li><a href="products.html">Products</a></li>
                 <li><a href="science.html">Science</a></li>
                 <li><a href="community.html">Community</a></li>
-                <li><a href="contact.html" class="btn">Shop Now</a></li>
+                <li><a href="checkout.html" class="btn">Checkout</a></li>
             </ul>
             <div id="mobile-menu">&#9776;</div>
         </nav>
     </header>
 
+    <!-- 2. Main Content Grid -->
     <main class="main-content-grid">
         
+        <!-- A. Product List Area -->
         <section class="products-area">
             <h1>Our Formulas</h1>
             <p style="margin-bottom: 30px; color: var(--color-primary); font-family: 'IBM Plex Mono', monospace;">Clinically Formulated. Purely Potent. Get Your VYTE.</p>
 
+            <!-- REQUIRED ID: Where script.js will inject the product cards -->
             <section id="product-list">
-                </section>
+                <!-- Products will load here via JavaScript -->
+            </section>
         </section>
 
+        <!-- B. Shopping Cart Sidebar -->
         <aside class="cart-sidebar">
             <h3>🛒 Shopping Cart</h3>
             
+            <!-- REQUIRED ID: Where script.js will list the items -->
             <div id="cart-items">
                 <p class="empty-cart-message">Your vitality sync is pending. Add a formula!</p>
             </div>
             
             <div class="cart-total-line">
                 <span>TOTAL:</span>
+                <!-- REQUIRED ID: This span holds the total amount -->
                 <strong>$<span id="cart-total">0.00</span></strong>
             </div>
             
-            <a href="contact.html" class="btn checkout-btn">Proceed to Checkout</a>
+            <!-- FIXED LINK: Now points correctly to checkout.html -->
+            <a href="checkout.html" class="btn checkout-btn">Proceed to Checkout</a>
         </aside>
 
     </main>
 
+    <!-- 3. Footer -->
     <footer>
         <p>Nature's VYTE © 2025. Backed by Science, Inspired by Nature.</p>
     </footer>
 
+    <!-- 4. JavaScript Links -->
     <script>
         // Mobile Menu Toggle
         document.getElementById('mobile-menu').addEventListener('click', function() {
@@ -352,6 +363,7 @@
         });
     </script>
     
+    <!-- Link to the cart logic file (script.js) -->
     <script src="script.js"></script>
 </body>
 </html>
