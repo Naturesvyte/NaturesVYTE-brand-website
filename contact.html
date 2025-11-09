@@ -1,52 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact – NaturesVYTE</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Nature's VYTE for support, press inquiries, or partnership opportunities.">
+    <title>Contact | Nature's VYTE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <style>
+        /* --- CORE MODERN STYLING (Shared CSS) --- */
+        :root {
+            --color-primary: #1A936F; 
+            --color-secondary: #0077B6; 
+            --color-accent: #E9FF70; 
+            --color-bg: #111827; 
+            --color-text: #EAEAEA;
+            --color-card-bg: rgba(30, 41, 59, 0.5); 
+            --shadow-subtle: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--color-bg); color: var(--color-text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        /* Header/Navigation */
+        .header-main { position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 15px 5vw; background: var(--color-card-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: var(--shadow-subtle); border-bottom: var(--border-glass); }
+        .header-main img { height: 50px; }
+        .nav-links { list-style: none; display: flex; align-items: center; }
+        .nav-links a { margin-left: 30px; text-decoration: none; color: var(--color-text); font-weight: 500; letter-spacing: 0.5px; transition: color 0.3s, text-shadow 0.3s; }
+        .nav-links a:hover { color: var(--color-accent); text-shadow: 0 0 8px var(--color-accent); }
+
+        /* CTA Button Styling */
+        .btn { background-color: var(--color-primary); color: var(--color-bg); padding: 10px 25px; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; display: inline-block; }
+        .btn:hover { background-color: var(--color-secondary); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 119, 182, 0.5); }
+        
+        /* Footer */
+        footer { padding: 30px 5vw; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.15); color: var(--color-text); font-size: 0.85rem; margin-top: auto; }
+
+        /* --- CONTACT PAGE SPECIFIC STYLES --- */
+        .contact-page { padding: 80px 5vw; max-width: 900px; margin: 0 auto; flex-grow: 1; text-align: center; }
+        .contact-page h1 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 3.5rem; color: var(--color-text); margin-bottom: 5px; }
+        .contact-page h2 { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; color: var(--color-accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 50px; }
+        
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; }
+        
+        .contact-form label { display: block; margin-bottom: 5px; font-weight: 500; color: var(--color-primary); }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-glass);
+            border-radius: 4px;
+            background-color: var(--color-card-bg);
+            color: var(--color-text);
+            font-family: 'IBM Plex Mono', monospace;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .contact-form textarea { resize: vertical; min-height: 150px; }
+        .contact-form .btn { margin-top: 10px; width: 100%; }
+
+        .contact-details { padding: 20px; border-left: 2px solid var(--color-primary); }
+        .contact-details h3 { color: var(--color-accent); font-size: 1.5rem; margin-top: 0; margin-bottom: 15px; }
+        .contact-details p { margin-bottom: 25px; font-size: 1rem; }
+        .contact-details a { color: var(--color-primary); text-decoration: none; font-weight: 600; transition: color 0.3s; }
+        .contact-details a:hover { color: var(--color-secondary); }
+
+        /* Mobile Menu */
+        #mobile-menu { display: none; font-size: 2rem; cursor: pointer; color: var(--color-accent); }
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; background: var(--color-card-bg); padding: 10px 0; margin-top: 10px; }
+            .nav-links.active { display: flex; }
+            #mobile-menu { display: block; }
+            .contact-page h1 { font-size: 2.5rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .contact-details { border-left: none; border-top: 2px solid var(--color-primary); padding-top: 30px; margin-top: 30px; }
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo"><img src="images/logo.png" alt="NaturesVYTE Logo"></div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div id="mobile-menu">&#9776;</div>
-    </nav>
-  </header>
+    <header class="header-main">
+        <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="science.html">Science</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html" class="btn">Shop Now</a></li>
+            </ul>
+            <div id="mobile-menu">&#9776;</div>
+        </nav>
+    </header>
 
-  <section class="contact">
-    <h1>Contact Us</h1>
-    <form id="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <p id="contact-msg"></p>
-  </section>
+    <section class="contact-page">
+        <h1>CONNECT WITH OUR LAB</h1>
+        <h2>TRANSPARENT SUPPORT. RAPID RESPONSE.</h2>
 
-  <footer>
-    <p>© 2025 NaturesVYTE. All rights reserved.</p>
-  </footer>
+        <div class="contact-grid">
+            <div class="contact-form">
+                <h3>Send Us a Secure Message</h3>
+                <form action="/submit-form-endpoint" method="POST">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
 
-  <script>
-    const contactForm = document.getElementById('contact-form');
-    const contactMsg = document.getElementById('contact-msg');
-    if(contactForm){
-      contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = contactForm.querySelector('input[type="text"]').value;
-        contactMsg.textContent = `Thank you, ${name}! Your message has been received.`;
-        contactForm.reset();
-      });
-    }
-  </script>
-  <script src="js/script.js"></script>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit" class="btn">Submit Inquiry</button>
+                </form>
+            </div>
+
+            <div class="contact-details">
+                <h3>Direct Contacts</h3>
+                
+                <p>
+                    **General & Order Support:** <br>
+                    For questions about your order, shipping, or product usage. <br>
+                    <a href="mailto:support@naturesvyte.com">support@naturesvyte.com</a>
+                </p>
+
+                <p>
+                    **Science & Formulation Inquiries:** <br>
+                    Connect with our research and development team for technical questions. <br>
+                    <a href="mailto:science@naturesvyte.com">science@naturesvyte.com</a>
+                </p>
+
+                <p>
+                    **Wholesale & Partnerships:** <br>
+                    For press, distribution, and affiliate opportunities. <br>
+                    <a href="mailto:partners@naturesvyte.com">partners@naturesvyte.com</a>
+                </p>
+
+                <p>
+                    **Response Time:** We strive to respond to all inquiries within 24-48 hours.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Nature's VYTE © 2025. Transparency is our policy.</p>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
