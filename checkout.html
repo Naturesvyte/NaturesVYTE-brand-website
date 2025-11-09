@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature's VYTE | Checkout</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <style>
+        /* =========================================================
+        CORE STYLING (Same as other pages)
+        =========================================================
+        */
+        :root {
+            --color-primary: #1A936F; 
+            --color-secondary: #0077B6;
+            --color-accent: #E9FF70;
+            --color-bg: #111827; 
+            --color-text: #EAEAEA;
+            --color-card-bg: rgba(30, 41, 59, 0.5);
+            --shadow-subtle: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Reusable CTA Button */
+        .btn {
+            background-color: var(--color-primary);
+            color: var(--color-bg); 
+            padding: 10px 25px; 
+            border: none;
+            border-radius: 4px; 
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 119, 182, 0.5);
+        }
+
+        /* HEADER & NAVIGATION (CSS omitted for brevity, assume consistent from index.html/products.html) */
+        .header-main { /* ... consistent styles ... */ } 
+        .header-main img { /* ... consistent styles ... */ }
+        .nav-links { /* ... consistent styles ... */ }
+
+        /* =========================================================
+        CHECKOUT LAYOUT
+        =========================================================
+        */
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Checkout form and Order Summary */
+            gap: 40px;
+            padding: 50px 5vw;
+            flex-grow: 1;
+        }
+
+        .checkout-main h1 {
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+        }
+
+        /* Form Styling */
+        .checkout-form {
+            background: var(--color-card-bg);
+            border: var(--border-glass);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--color-primary);
+        }
+
+        input[type="text"], 
+        input[type="email"], 
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--color-text);
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        input:focus {
+            border-color: var(--color-accent);
+            outline: none;
+            box-shadow: 0 0 5px rgba(233, 255, 112, 0.5);
+        }
+        
+        /* Two-column layout within the form */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 18px 0;
+            font-size: 1.1rem;
+        }
+
+
+        /* Order Summary Sidebar */
+        .order-summary {
+            background: #1e2937;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow-subtle);
+            height: fit-content;
+        }
+        .order-summary h2 {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        #summary-items {
+            margin-bottom: 20px;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.95rem;
+        }
+        .item-qty {
+            color: var(--color-accent);
+            margin-right: 10px;
+        }
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid var(--color-primary);
+        }
+        .total-line strong {
+            color: var(--color-accent);
+        }
+
+        /* FOOTER & MEDIA QUERIES (CSS omitted for brevity, assume consistent) */
+        
+        @media (max-width: 900px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-main">
+        <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li> 
+                <li><a href="products.html">Products</a></li>
+                <li><a href="science.html">Science</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="checkout.html" class="btn">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="checkout-grid">
+        
+        <section class="checkout-main">
+            <h1>Finalize Your Order</h1>
+            
+            <form class="checkout-form">
+                
+                <h2>1. Contact & Shipping</h2>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">Zip/Postal Code</label>
+                        <input type="text" id="zip" required>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">2. Payment Details</h2>
+                <div class="form-group">
+                    <label>Payment Method (Placeholder)</label>
+                    <p style="color: var(--color-accent); font-size: 0.9rem;">
+                        [Integration required for live payment processing]
+                    </p>
+                </div>
+
+                <button type="submit" class="btn place-order-btn">Place Order & Sync Vitality</button>
+            </form>
+        </section>
+
+        <aside class="order-summary">
+            <h2>Order Summary</h2>
+            
+            <div id="summary-items">
+                <p>Loading cart...</p>
+            </div>
+            
+            <div class="total-line">
+                <span>ORDER TOTAL:</span>
+                <strong>$<span id="checkout-total">0.00</span></strong>
+            </div>
+        </aside>
+
+    </main>
+
+    <footer>
+        <p>Nature's VYTE © 2025. Backed by Science, Inspired by Nature.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
