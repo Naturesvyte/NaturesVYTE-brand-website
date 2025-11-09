@@ -13,7 +13,7 @@
 
     <style>
         /* =========================================================
-        CORE STYLING (Same as other pages)
+        CORE STYLING & VARIABLES
         =========================================================
         */
         :root {
@@ -65,10 +65,50 @@
             box-shadow: 0 8px 20px rgba(0, 119, 182, 0.5);
         }
 
-        /* HEADER & NAVIGATION (CSS omitted for brevity, assume consistent from index.html/products.html) */
-        .header-main { /* ... consistent styles ... */ } 
-        .header-main img { /* ... consistent styles ... */ }
-        .nav-links { /* ... consistent styles ... */ }
+        /* =========================================================
+        HEADER & NAVIGATION (Fixes the logo size issue)
+        =========================================================
+        */
+        .header-main {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5vw;
+            background: var(--color-card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-subtle);
+            border-bottom: var(--border-glass);
+        }
+        
+        /* --- CRITICAL FIX: Defines logo size --- */
+        .header-main img {
+            height: 50px; 
+        }
+        /* -------------------------------------- */
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .nav-links li {
+            margin-left: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--color-accent);
+            text-shadow: 0 0 8px var(--color-accent); 
+        }
 
         /* =========================================================
         CHECKOUT LAYOUT
@@ -96,6 +136,12 @@
             border: var(--border-glass);
             border-radius: 8px;
             padding: 30px;
+        }
+
+        .checkout-form h2 {
+            font-size: 1.3rem;
+            color: var(--color-primary);
+            margin-bottom: 15px;
         }
 
         .form-group {
@@ -159,7 +205,9 @@
             margin-bottom: 20px;
         }
 
+        /* REQUIRED ID: for JS to inject items */
         #summary-items {
+            min-height: 100px;
             margin-bottom: 20px;
         }
         .summary-item {
@@ -185,8 +233,19 @@
             color: var(--color-accent);
         }
 
-        /* FOOTER & MEDIA QUERIES (CSS omitted for brevity, assume consistent) */
-        
+        /* FOOTER */
+        footer {
+            padding: 30px 5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.15);
+            color: var(--color-text);
+            font-size: 0.85rem;
+            margin-top: auto; 
+        }
+
+        /* MEDIA QUERIES */
         @media (max-width: 900px) {
             .checkout-grid {
                 grid-template-columns: 1fr;
@@ -199,6 +258,7 @@
 </head>
 
 <body>
+    <!-- Header: Navigation Bar -->
     <header class="header-main">
         <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
         <nav>
@@ -213,13 +273,16 @@
         </nav>
     </header>
 
+    <!-- Checkout Main Grid -->
     <main class="checkout-grid">
         
+        <!-- A. Checkout Form -->
         <section class="checkout-main">
             <h1>Finalize Your Order</h1>
             
-            <form class="checkout-form">
+            <form class="checkout-form" id="checkout-form">
                 
+                <!-- Contact Information -->
                 <h2>1. Contact & Shipping</h2>
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -237,6 +300,7 @@
                     </div>
                 </div>
 
+                <!-- Shipping Address -->
                 <div class="form-group">
                     <label for="address">Street Address</label>
                     <input type="text" id="address" required>
@@ -252,37 +316,47 @@
                     </div>
                 </div>
 
+                <!-- Payment Placeholder -->
                 <h2 style="margin-top: 40px;">2. Payment Details</h2>
                 <div class="form-group">
                     <label>Payment Method (Placeholder)</label>
                     <p style="color: var(--color-accent); font-size: 0.9rem;">
-                        [Integration required for live payment processing]
+                        [Integration required for live payment processing.]
                     </p>
                 </div>
 
+                <!-- Submission Button -->
                 <button type="submit" class="btn place-order-btn">Place Order & Sync Vitality</button>
             </form>
         </section>
 
+        <!-- B. Order Summary Sidebar -->
         <aside class="order-summary">
             <h2>Order Summary</h2>
             
+            <!-- REQUIRED ID: Items will be injected here by JavaScript -->
             <div id="summary-items">
-                <p>Loading cart...</p>
+                <!-- Default loading text will be replaced by script.js -->
+                <p class="empty-cart-message" style="opacity:1;">Loading cart...</p>
             </div>
             
             <div class="total-line">
                 <span>ORDER TOTAL:</span>
+                <!-- REQUIRED ID: Total will be updated here by JavaScript -->
                 <strong>$<span id="checkout-total">0.00</span></strong>
             </div>
         </aside>
 
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>Nature's VYTE © 2025. Backed by Science, Inspired by Nature.</p>
     </footer>
 
+    <!-- JavaScript Link -->
     <script src="script.js"></script>
 </body>
 </html>
+
+.
