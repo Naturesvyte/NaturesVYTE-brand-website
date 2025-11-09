@@ -1,50 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Learn about NaturesVYTE – a brand dedicated to natural, effective supplements for holistic well-being.">
-  <title>About Us | NaturesVYTE</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="images/logo.png">
-  <style>
-    body {font-family: Arial, sans-serif; margin: 0; padding: 0;}
-    header {display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
-    header img {height: 60px;}
-    nav a {margin: 0 15px; text-decoration: none; color: #333; font-weight: 600;}
-    nav a:hover {color: #3c8d40;}
-    .about-section {max-width: 900px; margin: 60px auto; padding: 20px;}
-    .about-section h1 {color: #2c662d;}
-    .about-section p {line-height: 1.6; color: #444;}
-    footer {text-align: center; padding: 30px; background: #f5f5f5; color: #555; margin-top: 60px;}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover the mission of Nature's VYTE: combining Earth's purity with modern bioscience for superior vitality.">
+    <title>About Us | Nature's VYTE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <style>
+        /* --- CORE MODERN STYLING (Shared CSS) --- */
+        :root {
+            --color-primary: #1A936F; 
+            --color-secondary: #0077B6; 
+            --color-accent: #E9FF70; 
+            --color-bg: #111827; 
+            --color-text: #EAEAEA;
+            --color-card-bg: rgba(30, 41, 59, 0.5); 
+            --shadow-subtle: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--color-bg); color: var(--color-text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        /* Header/Navigation */
+        .header-main { position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 15px 5vw; background: var(--color-card-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: var(--shadow-subtle); border-bottom: var(--border-glass); }
+        .header-main img { height: 50px; }
+        .nav-links { list-style: none; display: flex; align-items: center; }
+        .nav-links a { margin-left: 30px; text-decoration: none; color: var(--color-text); font-weight: 500; letter-spacing: 0.5px; transition: color 0.3s, text-shadow 0.3s; }
+        .nav-links a:hover { color: var(--color-accent); text-shadow: 0 0 8px var(--color-accent); }
+
+        /* CTA Button Styling */
+        .btn { background-color: var(--color-primary); color: var(--color-bg); padding: 10px 25px; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; display: inline-block; }
+        .btn:hover { background-color: var(--color-secondary); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 119, 182, 0.5); }
+        
+        /* Footer */
+        footer { padding: 30px 5vw; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.15); color: var(--color-text); font-size: 0.85rem; margin-top: auto; }
+
+        /* --- ABOUT PAGE SPECIFIC STYLES --- */
+        .about-page { padding: 80px 5vw; max-width: 1000px; margin: 0 auto; flex-grow: 1; text-align: center; }
+        .about-page h1 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 3.5rem; color: var(--color-text); margin-bottom: 5px; }
+        .about-page h2 { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; color: var(--color-accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 50px; }
+        
+        .mission-text { font-size: 1.2rem; max-width: 800px; margin: 0 auto 60px auto; font-weight: 300; }
+        .mission-text strong { color: var(--color-primary); font-weight: 700; }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; margin-bottom: 60px; }
+        
+        .value-card { padding: 25px; border-radius: 8px; background: var(--color-card-bg); border: var(--border-glass); box-shadow: var(--shadow-subtle); }
+        .value-card h3 { color: var(--color-accent); font-size: 1.8rem; margin-bottom: 10px; }
+        .value-card p { font-size: 1rem; }
+        
+        .woman-owned { 
+            background: linear-gradient(90deg, #1f2937, var(--color-bg));
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--color-primary);
+            text-align: center;
+        }
+        .woman-owned p { font-style: italic; color: var(--color-primary); margin-bottom: 0; }
+
+        /* Mobile Menu */
+        #mobile-menu { display: none; font-size: 2rem; cursor: pointer; color: var(--color-accent); }
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; background: var(--color-card-bg); padding: 10px 0; margin-top: 10px; }
+            .nav-links.active { display: flex; }
+            #mobile-menu { display: block; }
+            .about-page h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <a href="index.html"><img src="images/logo.png" alt="NaturesVYTE Logo"></a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+    <header class="header-main">
+        <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="science.html">Science</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html" class="btn">Shop Now</a></li>
+            </ul>
+            <div id="mobile-menu">&#9776;</div>
+        </nav>
+    </header>
 
-  <section class="about-section">
-    <h1>About NaturesVYTE</h1>
-    <p>
-      NaturesVYTE was founded with one mission — to empower individuals to live their best lives through natural, high-quality nutrition. 
-      Our supplements combine the purity of nature with cutting-edge science, ensuring maximum potency and safety in every capsule.
-    </p>
-    <p>
-      We believe wellness starts with balance — between body, mind, and environment. 
-      That’s why every product we make is sustainably sourced, rigorously tested, and designed to help you thrive.
-    </p>
-  </section>
+    <section class="about-page">
+        <h1>OUR ORIGIN & MISSION</h1>
+        <h2>WHERE NATURE MEETS BIO-TECHNOLOGY.</h2>
 
-  <footer>
-    <p>© 2025 NaturesVYTE. All rights reserved.</p>
-  </footer>
+        <p class="mission-text">
+            Nature's VYTE was founded on a simple premise: you shouldn't have to choose between **Earth's purity** and **modern efficacy**. We saw a supplement market full of fillers, opaque science, and unnecessary ingredients. Our mission is to strip away the noise and deliver targeted, **clinically-backed nutrition** designed for the demands of the 21st century. We are here to fuel your peak vitality.
+        </p>
+        
+        <div class="woman-owned">
+             <p style="font-size: 1.2rem; font-weight: 700;">PROUDLY A WOMAN-OWNED BUSINESS</p>
+        </div>
+        <hr style="border: 0; height: 1px; background-color: var(--color-accent); margin: 50px 0;">
+
+        <div class="about-grid">
+            <div class="value-card">
+                <h3>VITALITY</h3>
+                <p>We are obsessed with maximizing human potential. Our products are formulated not just for maintenance, but for **measurable, peak performance** in body and mind.</p>
+            </div>
+            <div class="value-card">
+                <h3>TRANSPARENCY</h3>
+                <p>No proprietary blends, ever. We disclose every active ingredient and dosage, backed by **third-party lab verification**, so you know exactly what you're fueling your body with.</p>
+            </div>
+            <div class="value-card">
+                <h3>PURITY</h3>
+                <p>We prioritize ethically sourced, clean ingredients. **Non-GMO**, gluten-free, and manufactured in a GMP-certified facility, ensuring the highest standard of product safety.</p>
+            </div>
+            <div class="value-card">
+                <h3>INNOVATION</h3>
+                <p>Our research and development team constantly reviews emerging bioscience to deliver novel, **highly bioavailable** formulas that stay ahead of the curve.</p>
+            </div>
+        </div>
+
+        <a href="products.html" class="btn" style="padding: 15px 40px; font-size: 1rem;">See the Difference for Yourself</a>
+
+    </section>
+
+    <footer>
+        <p>Nature's VYTE © 2025. Fueling Modern Vitality.</p>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
