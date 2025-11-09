@@ -90,7 +90,7 @@
         .btn {
             background-color: var(--color-primary);
             color: var(--color-bg); 
-            padding: 10px 25px; /* Slightly smaller button for product cards */
+            padding: 10px 25px; 
             border: none;
             border-radius: 4px; 
             cursor: pointer;
@@ -111,7 +111,7 @@
 
         /* Product Page Layout */
         .products-page {
-            flex-grow: 1; /* Allows content to take up remaining space */
+            flex-grow: 1; 
             padding: 80px 5vw;
             text-align: center;
         }
@@ -161,20 +161,46 @@
 
         .product-card img {
             width: 100%;
-            max-width: 200px; /* Standardize product image size */
+            max-width: 200px; 
             height: auto;
             margin-bottom: 20px;
             border-radius: 4px;
-            /* Added a subtle shadow consistent with the brand style */
             filter: drop-shadow(0 0 10px rgba(233, 255, 112, 0.3));
         }
 
         .product-card h3 {
             font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 5px; /* Reduced margin to fit the tag closer */
             color: var(--color-accent);
         }
+
+        /* --- NEW STYLES FOR TRANSPARENCY TAGS --- */
+        .tag-performance {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--color-bg);
+            background-color: var(--color-secondary); /* Scientific Blue */
+            padding: 3px 8px;
+            border-radius: 2px;
+            letter-spacing: 1px;
+            margin-bottom: 15px; /* Spacing below the tag */
+            text-transform: uppercase;
+        }
+        .tag-womens {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--color-bg);
+            background-color: var(--color-primary); /* Forest Green */
+            padding: 3px 8px;
+            border-radius: 2px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        /* --- END NEW STYLES --- */
 
         .product-card p {
             font-size: 1rem;
@@ -185,7 +211,7 @@
         /* Shopping Cart Section Styling */
         .shopping-cart {
             padding: 40px 5vw;
-            background: rgba(0, 0, 0, 0.3); /* Darker background for the cart area */
+            background: rgba(0, 0, 0, 0.3); 
             border-top: var(--border-glass);
             text-align: center;
         }
@@ -212,7 +238,7 @@
             background: rgba(0, 0, 0, 0.15);
             color: var(--color-text);
             font-size: 0.85rem;
-            margin-top: auto; /* Ensures footer sticks to the bottom */
+            margin-top: auto; 
         }
         
         /* Mobile Menu (Hidden on Desktop) */
@@ -229,7 +255,7 @@
                 padding: 10px 5vw;
             }
             .nav-links {
-                display: none; /* Hide standard nav */
+                display: none; 
                 width: 100%;
                 flex-direction: column;
                 background: var(--color-card-bg);
@@ -276,6 +302,7 @@
             <div class="product-card">
                 <img src="images/megacreatine.jpg" alt="Nature's VYTE MegaCreatine">
                 <h3>MegaCreatine</h3>
+                <span class="tag-performance">PEAK PERFORMANCE</span>
                 <p>
                     **Maximum Power Formula.** Optimized blend for superior muscle recovery, peak strength, and neurological support. Pure, micronized, and highly bioavailable.
                 </p>
@@ -285,6 +312,7 @@
             <div class="product-card">
                 <img src="images/womens-health.jpg" alt="Nature's VYTE Women's Health Formula">
                 <h3>Women's Health</h3>
+                <span class="tag-womens">HORMONAL SUPPORT</span>
                 <p>
                     **Hormonal Balance & Energy.** A synergistic blend targeting bone density, mood stability, and sustained energy for modern female vitality.
                 </p>
@@ -297,7 +325,7 @@
     <section class="shopping-cart">
         <h2>YOUR CART</h2>
         <ul id="cart-items">
-            </ul>
+        </ul>
         <p>Total: $<span id="cart-total">0.00</span></p>
         <button class="btn" id="checkout-btn">Checkout</button>
     </section>
