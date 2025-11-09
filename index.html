@@ -14,11 +14,11 @@
 
     <style>
         /* =========================================================
-        CORE STYLING & VARIABLES
+        CORE STYLING & VARIABLES (Kept Consistent)
         =========================================================
         */
         :root {
-            /* Colors */
+            /* Biophilic (Nature) Colors */
             --color-primary: #1A936F; /* Deep Forest Green */
             --color-secondary: #0077B6; /* Scientific Blue/Cyan */
             --color-accent: #E9FF70; /* Neon/Gen-Z Green */
@@ -47,7 +47,7 @@
         }
 
         /* =========================================================
-        HEADER & NAVIGATION
+        HEADER & NAVIGATION (Updated for consistency and About link)
         =========================================================
         */
         .header-main {
@@ -75,8 +75,11 @@
             align-items: center;
         }
         
-        .nav-links a {
+        .nav-links li {
             margin-left: 30px;
+        }
+
+        .nav-links a {
             text-decoration: none;
             color: var(--color-text);
             font-weight: 500;
@@ -89,7 +92,7 @@
             text-shadow: 0 0 8px var(--color-accent); 
         }
 
-        /* CTA Button Styling */
+        /* CTA Button Styling (Shared) */
         .btn {
             background-color: var(--color-primary);
             color: var(--color-bg); 
@@ -121,38 +124,83 @@
         }
 
         /* =========================================================
-        HERO SECTION
+        HERO SECTION (Integrated from Previous Code)
         =========================================================
         */
-        .hero { 
-            height: 80vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center;
-            /* Placeholder: Use a dark background image or a gradient */
-            background: linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)), url('images/hero-bg-placeholder.jpg') no-repeat center center/cover;
-            border-bottom: 2px solid var(--color-primary);
-        }
-        .hero-content { max-width: 800px; padding: 0 20px; }
-        .hero h1 { 
-            font-size: 4rem; 
-            font-weight: 900; 
-            margin-bottom: 15px; 
-            color: var(--color-accent); 
-            text-shadow: 0 0 15px rgba(233, 255, 112, 0.6); /* Enhanced glow */
-        }
-        .hero p { 
-            font-size: 1.5rem; 
-            margin-bottom: 30px; 
-            font-weight: 300; 
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            min-height: 85vh;
+            padding: 5vh 5vw;
+            /* Using a deep gradient for the background */
+            background: radial-gradient(circle at 10% 10%, #1c3d59 0%, var(--color-bg) 60%); 
         }
 
+        .hero-content {
+            padding-right: 40px;
+        }
+
+        .hero-subhead {
+            color: var(--color-accent);
+            font-family: 'IBM Plex Mono', monospace; 
+            font-size: 0.8rem; 
+            letter-spacing: 0; 
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: clip;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 3.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.05;
+        }
+        
+        .highlight {
+            color: var(--color-accent);
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(233, 255, 112, 0.8);
+            margin-right: -4px; 
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin-bottom: 30px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            position: relative;
+        }
+        
+        .hero-visual img {
+            max-width: 90%;
+            height: auto;
+            /* Strong glow effect on the logo */
+            filter: drop-shadow(0 0 25px rgba(233, 255, 112, 0.6));
+            transition: transform 0.5s;
+        }
+        
+        .hero-visual img:hover {
+            transform: scale(1.05);
+        }
+        
         /* =========================================================
-        TRUST BAR (Quick Credibility)
+        TRUST BAR (Quick Credibility - New Structure)
         =========================================================
         */
-        .trust-bar {
+        .trust-bar-new {
             background-color: var(--color-secondary);
             color: var(--color-bg);
             padding: 15px 5vw;
@@ -164,21 +212,22 @@
             flex-wrap: wrap;
             border-top: 5px solid var(--color-accent);
             border-bottom: 5px solid var(--color-accent);
-            
         }
-        .trust-bar span {
+
+        .trust-bar-new span {
             margin: 5px 15px;
             font-size: 0.9rem;
             white-space: nowrap;
         }
-        .trust-bar strong {
+
+        .trust-bar-new strong {
             color: var(--color-bg); 
             margin-right: 5px;
         }
-        /* Style the checkmark emoji */
-        .trust-bar span::before {
+
+        .trust-bar-new span::before {
             content: '✓ ';
-            color: var(--color-accent); /* Green checkmark */
+            color: var(--color-accent); 
             font-weight: 900;
         }
 
@@ -187,7 +236,7 @@
         =========================================================
         */
         .features-section { 
-            padding: 80px 5vw; /* Increased padding since video is removed */
+            padding: 80px 5vw; 
             text-align: center; 
         }
 
@@ -241,7 +290,7 @@
         }
 
         /* =========================================================
-        FOOTER
+        FOOTER (Simplified for consistency)
         =========================================================
         */
         footer {
@@ -256,9 +305,26 @@
         }
 
         /* =========================================================
-        MEDIA QUERIES (Responsiveness)
+        MEDIA QUERIES 
         =========================================================
         */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                min-height: auto;
+            }
+            .hero-content {
+                padding-right: 0;
+            }
+            .hero-visual {
+                min-height: 250px;
+                margin-top: 40px;
+            }
+            .hero-visual img {
+                max-width: 60%; 
+            }
+        }
         @media (max-width: 768px) {
             .header-main {
                 flex-wrap: wrap;
@@ -280,11 +346,21 @@
             #mobile-menu {
                 display: block;
             }
-            .hero { height: 60vh; }
             .hero h1 { font-size: 3rem; }
             .hero p { font-size: 1.2rem; }
-            .trust-bar { justify-content: space-between; }
-            .trust-bar span { margin: 5px 0; width: 48%; }
+            .trust-bar-new { justify-content: space-between; }
+            .trust-bar-new span { margin: 5px 0; width: 48%; }
+        }
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero-subhead {
+                white-space: normal;
+                letter-spacing: 3px;
+                font-size: 0.8rem;
+                text-overflow: clip;
+            }
         }
     </style>
 </head>
@@ -307,13 +383,22 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>VYTE: VITALITY, SYNTHESIZED.</h1>
-            <p>Unlocking peak potential through pure, science-backed formulas. Woman-owned and revolutionizing wellness.</p>
-            <a href="products.html" class="btn" style="padding: 15px 35px; font-size: 1.1rem;">Explore Formulas →</a>
+            <p class="hero-subhead">BACKED BY SCIENCE, INSPIRED BY NATURE</p>
+            <h1>
+                <span class="highlight">V</span>ITALITY. 
+                <span class="highlight">Y</span>OUTH. 
+                <span class="highlight">T</span>ECHNOLOGY. 
+                <span class="highlight">E</span>NERGY.
+            </h1>
+            <p>We blend **cutting-edge bioscience** with the **purest natural extracts**. Fuel your modern life with supplements that are clean, effective, and ethically sourced.</p>
+            <a href="products.html" class="btn">Explore Our Synergy</a>
+        </div>
+        <div class="hero-visual" role="img" aria-label="Nature's VYTE Complex Logo">
+            <img src="images/logo.png" alt="Nature's VYTE Premium Scientific Logo">
         </div>
     </section>
 
-    <div class="trust-bar">
+    <div class="trust-bar-new">
         <span><strong>Lab Verified:</strong> Third-Party Tested</span>
         <span><strong>Purity:</strong> Non-GMO & Gluten Free</span>
         <span><strong>Standards:</strong> GMP Certified Facility</span>
