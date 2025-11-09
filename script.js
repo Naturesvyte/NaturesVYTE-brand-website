@@ -1,142 +1,253 @@
-// =========================================================
-// Nature's VYTE: Shopping Cart Logic (script.js) - UPDATED FOR LOCALSTORAGE
-// =========================================================
+/**
+ * Nature's VYTE E-Commerce Script
+ * Handles product display, shopping cart functionality, 
+ * data persistence via localStorage, and rendering on the checkout page.
+ */
 
-// 1. CORE DATA STRUCTURES
-// =========================================================
+// --- GLOBAL STATE & PRODUCTS (Must match product data in HTML) ---
 const products = [
-    { id: 1, name: "MegaCreatine", price: 34.99, image: "images/megacreatine.jpg" },
-    { id: 2, name: "Women's Health Formula", price: 42.99, image: "images/womens-health.jpg" }
+    { id: 1, name: "VYTE Daily Greens", price: 49.99, unit: "jar" },
+    { id: 2, name: "Cogni-Boost Nootropics", price: 34.50, unit: "bottle" },
+    { id: 3, name: "Restorative Magnesium Glycinate", price: 22.00, unit: "bottle" },
+    { id: 4, name: "Endurance Pre-Workout Mix", price: 39.99, unit: "pouch" }
 ];
 
-let cart = []; 
+let cart = []; // Array to hold { id, name, price, quantity }
 
-// =========================================================
-// 2. LOCAL STORAGE UTILITY
-// =========================================================
+// --- STORAGE FUNCTIONS ---
+
+/**
+ * Saves the current cart state to local storage.
+ */
 function saveCart() {
-    // Save the current state of the cart to browser's local storage
-    localStorage.setItem('vyteCart', JSON.stringify(cart));
+    try {
+        localStorage.setItem('shoppingCart', JSON.stringify(cart));
+    } catch (e) {
+        console.error("Could not save cart to localStorage:", e);
+    }
 }
 
+/**
+ * Loads the cart state from local storage.
+ */
 function loadCart() {
-    const savedCart = localStorage.getItem('vyteCart');
-    if (savedCart) {
-        // Overwrite the empty 'cart' array with the saved data
-        cart = JSON.parse(savedCart);
-    }
-}
-
-// =========================================================
-// 3. PRODUCT RENDERING (Only runs on products.html)
-// =========================================================
-function renderProducts() {
-    const productList = document.getElementById('product-list');
-    if (!productList) return;
-
-    // ... (Product rendering code is the same) ...
-    productList.innerHTML = products.map(product => `
-        <div class="product-card">
-            <img src="${product.image}" alt="${product.name}">
-            <h4>${product.name}</h4>
-            <p>$${product.price.toFixed(2)}</p>
-            <p class="product-description">High purity, highly bioavailable formula for peak ${product.id === 1 ? 'strength and focus.' : 'hormonal balance.'}</p>
-            <button class="btn add-to-cart" data-id="${product.id}">
-                Add to Cart
-            </button>
-        </div>
-    `).join('');
-
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', handleAddToCart);
-    });
-}
-
-// =========================================================
-// 4. CART MANAGEMENT & RENDERING
-// =========================================================
-function handleAddToCart(event) {
-    const productId = parseInt(event.target.dataset.id);
-    const product = products.find(p => p.id === productId);
-
-    if (product) {
-        const existingItem = cart.find(item => item.id === productId);
-
-        if (existingItem) {
-            existingItem.quantity++;
+    try {
+        const storedCart = localStorage.getItem('shoppingCart');
+        if (storedCart) {
+            cart = JSON.parse(storedCart);
         } else {
-            cart.push({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                quantity: 1
-            });
+            cart = [];
         }
-        
-        // IMPORTANT: Save the cart state after modification
-        saveCart(); 
-        
-        // Visual feedback to the user
-        event.target.textContent = 'Added! ✓';
-        event.target.disabled = true;
-        setTimeout(() => {
-            event.target.textContent = 'Add to Cart';
-            event.target.disabled = false;
-        }, 800);
-
-        // Render both possible cart views (products.html and checkout.html)
-        renderCart('cart-items', 'cart-total');
+    } catch (e) {
+        console.error("Could not load cart from localStorage:", e);
+        cart = [];
     }
 }
 
-function renderCart(itemsContainerId, totalElementId) {
-    const cartItemsContainer = document.getElementById(itemsContainerId);
-    const cartTotalElement = document.getElementById(totalElementId);
+// --- CART MANIPULATION FUNCTIONS ---
 
-    if (!cartItemsContainer || !cartTotalElement) return;
+/**
+ * Adds or updates a product in the cart.
+ * @param {number} productId 
+ */
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
 
-    // 1. Render items
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = `<p class="empty-cart-message">
-            ${itemsContainerId === 'cart-items' ? 'Your vitality sync is pending. Add a formula!' : 'Your cart is empty. Please return to the shop.'}
-        </p>`;
+    const cartItem = cart.find(item => item.id === productId);
+
+    if (cartItem) {
+        cartItem.quantity += 1;
     } else {
-        cartItemsContainer.innerHTML = cart.map(item => {
-            const isCheckout = itemsContainerId === 'summary-items';
-            
-            // Rendered HTML changes slightly based on the page (products.html vs checkout.html)
-            return `
-                <div class="${isCheckout ? 'summary-item' : 'cart-item'}">
-                    <span class="item-name">${item.name}</span>
-                    <span class="item-qty">x${item.quantity}</span>
-                    <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
-                </div>
-            `;
-        }).join('');
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: 1
+        });
     }
 
-    // 2. Calculate and render total
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotalElement.textContent = total.toFixed(2);
+    saveCart();
+    // Check if the sidebar exists (only on products.html)
+    if (document.getElementById('cart-items')) {
+        renderCartSidebar();
+    }
 }
 
-// =========================================================
-// 5. INITIALIZATION
-// =========================================================
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Always load the cart state first
+// --- RENDERING FUNCTIONS ---
+
+/**
+ * Renders the cart contents in the sidebar on products.html.
+ */
+function renderCartSidebar() {
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartTotalEl = document.getElementById('cart-total');
+    const cartCountEl = document.getElementById('cart-count');
+
+    if (!cartItemsEl || !cartTotalEl || !cartCountEl) return;
+
+    cartItemsEl.innerHTML = '';
+    let total = 0;
+    let itemCount = 0;
+
+    if (cart.length === 0) {
+        cartItemsEl.innerHTML = '<p class="text-sm text-gray-400 p-4">Your vitality journey starts here. Add products!</p>';
+    } else {
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            itemCount += item.quantity;
+
+            const itemEl = document.createElement('div');
+            itemEl.className = 'cart-item';
+            itemEl.innerHTML = `
+                <span>${item.name}</span>
+                <span class="font-mono text-green-400">
+                    <span class="item-qty">x${item.quantity}</span> 
+                    $${itemTotal.toFixed(2)}
+                </span>
+            `;
+            cartItemsEl.appendChild(itemEl);
+        });
+    }
+
+    cartTotalEl.textContent = total.toFixed(2);
+    cartCountEl.textContent = itemCount; 
+}
+
+
+/**
+ * Renders the order summary on the checkout.html page.
+ */
+function renderCheckoutSummary() {
+    const summaryItemsEl = document.getElementById('summary-items');
+    const checkoutTotalEl = document.getElementById('checkout-total');
+    
+    // Safety check to ensure we are on the correct page and the elements exist
+    if (!summaryItemsEl || !checkoutTotalEl) {
+        console.warn("Checkout summary elements not found. Not rendering.");
+        return;
+    }
+
+    summaryItemsEl.innerHTML = '';
+    let total = 0;
+
+    if (cart.length === 0) {
+        summaryItemsEl.innerHTML = '<p style="color: #E9FF70; font-style: italic;">Your cart is empty. Please return to the products page to select items.</p>';
+    } else {
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            const itemEl = document.createElement('div');
+            itemEl.className = 'summary-item';
+            itemEl.innerHTML = `
+                <span>
+                    <span class="item-qty">x${item.quantity}</span> ${item.name}
+                </span>
+                <span>$${itemTotal.toFixed(2)}</span>
+            `;
+            summaryItemsEl.appendChild(itemEl);
+        });
+    }
+
+    checkoutTotalEl.textContent = total.toFixed(2);
+}
+
+
+// --- INITIALIZATION ---
+
+/**
+ * Initializes the page: loads cart and sets up event listeners/renders.
+ */
+function initPage() {
     loadCart();
 
-    // 2. Check which page we are on and render the specific views
-    const isProductsPage = document.getElementById('product-list');
-    const isCheckoutPage = document.getElementById('summary-items');
+    const path = window.location.pathname;
 
-    if (isProductsPage) {
-        renderProducts(); // Render product cards only on products.html
-        renderCart('cart-items', 'cart-total'); // Render cart sidebar
-    }
+    // Check if we are on the products page
+    if (path.includes('products.html')) {
+        console.log("Initializing Products Page.");
+        renderCartSidebar();
+        
+        // Add event listeners to all 'Add to Cart' buttons
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productId = parseInt(e.target.dataset.productId);
+                addToCart(productId);
+            });
+        });
 
-    if (isCheckoutPage) {
-        renderCart('summary-items', 'checkout-total'); // Render checkout summary
+    // Check if we are on the checkout page
+    } else if (path.includes('checkout.html')) {
+        console.log("Initializing Checkout Page.");
+        // This is the critical line that populates the summary
+        renderCheckoutSummary();
+
+        // Optional: Handle form submission for checkout (placeholder)
+        const checkoutForm = document.getElementById('checkout-form');
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // In a real app, this is where you'd send data to the server and process payment
+                alertBox.show('Thank you! Your order has been placed successfully!', 'success');
+                cart = []; // Clear cart upon successful order
+                saveCart();
+                renderCheckoutSummary(); // Re-render to show empty cart
+            });
+        }
     }
-});
+}
+
+
+// --- CUSTOM ALERT BOX (Since window.alert is disallowed) ---
+
+const alertBox = {
+    // Basic implementation of an in-page alert box
+    el: null,
+    init() {
+        this.el = document.createElement('div');
+        this.el.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-family: 'Montserrat', sans-serif;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+            transform: translateY(-50px);
+            color: #111827;
+        `;
+        document.body.appendChild(this.el);
+    },
+    show(message, type = 'info') {
+        if (!this.el) this.init();
+
+        let bgColor = '#fff';
+        if (type === 'success') bgColor = '#E9FF70'; 
+        if (type === 'error') bgColor = '#FF7070'; 
+        if (type === 'info') bgColor = '#0077B6';
+        
+        this.el.style.backgroundColor = bgColor;
+        this.el.style.color = type === 'info' ? '#EAEAEA' : '#111827';
+        this.el.textContent = message;
+        
+        this.el.style.opacity = 1;
+        this.el.style.transform = 'translateY(0)';
+
+        setTimeout(() => {
+            this.el.style.opacity = 0;
+            this.el.style.transform = 'translateY(-50px)';
+        }, 5000);
+    }
+};
+
+
+// Execute initialization when the window loads
+window.addEventListener('load', initPage);
+
+// Ensure alert box is initialized
+window.addEventListener('load', () => alertBox.init());
