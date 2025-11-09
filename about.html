@@ -47,7 +47,7 @@
         .about-page h1 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 3.5rem; color: var(--color-text); margin-bottom: 5px; }
         .about-page h2 { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; color: var(--color-accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 50px; }
         
-        .mission-text { font-size: 1.2rem; max-width: 800px; margin: 0 auto 60px auto; font-weight: 300; }
+        .mission-text { font-size: 1.2rem; max-width: 800px; margin: 0 auto 60px auto; font-weight: 300; text-align: left; }
         .mission-text strong { color: var(--color-primary); font-weight: 700; }
 
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; margin-bottom: 60px; }
@@ -62,8 +62,10 @@
             border-radius: 8px;
             border: 1px solid var(--color-primary);
             text-align: center;
+            margin-bottom: 50px;
         }
-        .woman-owned p { font-style: italic; color: var(--color-primary); margin-bottom: 0; }
+        .woman-owned p { font-style: italic; color: var(--color-primary); margin-bottom: 0; font-size: 1.2rem; font-weight: 700;}
+        .woman-owned h4 { font-size: 1.5rem; color: var(--color-text); margin-top: 10px; }
 
         /* Mobile Menu */
         #mobile-menu { display: none; font-size: 2rem; cursor: pointer; color: var(--color-accent); }
@@ -73,6 +75,7 @@
             #mobile-menu { display: block; }
             .about-page h1 { font-size: 2.5rem; }
             .about-grid { grid-template-columns: 1fr; }
+            .mission-text { text-align: center; }
         }
     </style>
 </head>
@@ -96,31 +99,39 @@
         <h1>OUR ORIGIN & MISSION</h1>
         <h2>WHERE NATURE MEETS BIO-TECHNOLOGY.</h2>
 
-        <p class="mission-text">
-            Nature's VYTE was founded on a simple premise: you shouldn't have to choose between **Earth's purity** and **modern efficacy**. We saw a supplement market full of fillers, opaque science, and unnecessary ingredients. Our mission is to strip away the noise and deliver targeted, **clinically-backed nutrition** designed for the demands of the 21st century. We are here to fuel your peak vitality.
-        </p>
+        <div class="mission-text">
+            <p>
+                Nature's VYTE was not founded in a boardroom. It was founded out of necessity. Our founder, a professional who constantly balanced peak performance with wellness, grew tired of supplement shelves filled with products that were either **full of synthetic fillers** or **lacked scientific proof** of absorption.
+            </p>
+            <p>
+                She recognized a massive gap: formulas designed for the modern body and mind, backed by rigorous data, yet sourced with nature's purest intent. Our mission became clear: to synthesize the Earth's potential with laboratory precision, delivering **measurable vitality** without compromise. We are here to fuel the ambitious, the health-conscious, and everyone who demands transparency.
+            </p>
+        </div>
         
         <div class="woman-owned">
-             <p style="font-size: 1.2rem; font-weight: 700;">PROUDLY A WOMAN-OWNED BUSINESS</p>
+             <p>PROUDLY A WOMAN-OWNED BUSINESS</p>
+             <h4>Why This Perspective Matters</h4>
+             <p style="font-style: normal; font-size: 1rem; color: var(--color-text);">
+                The journey to peak health is often complex, especially for women navigating hormonal shifts, high stress, and demanding schedules. Our formulas are developed with an emphasis on **holistic, targeted nutrition** that goes beyond basic vitamins. From bone density and hormonal stability to sustained mental clarity, Nature's VYTE is committed to providing solutions that truly work for everyone who seeks balance and peak function.
+             </p>
         </div>
-        <hr style="border: 0; height: 1px; background-color: var(--color-accent); margin: 50px 0;">
 
         <div class="about-grid">
             <div class="value-card">
                 <h3>VITALITY</h3>
-                <p>We are obsessed with maximizing human potential. Our products are formulated not just for maintenance, but for **measurable, peak performance** in body and mind.</p>
+                <p>We are obsessed with maximizing human potential. Our products are formulated not just for maintenance, but for **measurable, peak performance** in body and mind. We target cellular energy, not just temporary boosts.</p>
             </div>
             <div class="value-card">
                 <h3>TRANSPARENCY</h3>
-                <p>No proprietary blends, ever. We disclose every active ingredient and dosage, backed by **third-party lab verification**, so you know exactly what you're fueling your body with.</p>
+                <p>No proprietary blends, ever. We disclose every active ingredient and dosage, backed by **third-party lab verification**, so you know exactly what you're fueling your body with. **Radical honesty is our standard.**</p>
             </div>
             <div class="value-card">
                 <h3>PURITY</h3>
-                <p>We prioritize ethically sourced, clean ingredients. **Non-GMO**, gluten-free, and manufactured in a GMP-certified facility, ensuring the highest standard of product safety.</p>
+                <p>We prioritize ethically sourced, clean ingredients. **Non-GMO**, gluten-free, and manufactured in a GMP-certified facility, ensuring the highest standard of product safety. If it doesn't serve your health, it's not in our bottle.</p>
             </div>
             <div class="value-card">
                 <h3>INNOVATION</h3>
-                <p>Our research and development team constantly reviews emerging bioscience to deliver novel, **highly bioavailable** formulas that stay ahead of the curve.</p>
+                <p>Our R&D team constantly reviews emerging bioscience to deliver novel, **highly bioavailable** formulas that stay ahead of the curve. We believe in using the latest technology to unlock nature's ancient power.</p>
             </div>
         </div>
 
