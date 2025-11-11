@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nature's VYTE | Checkout</title>
+    <title>Nature's VYTE | Products</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Using a simple shopping bag icon from Font Awesome for the cart -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <link rel="icon" type="image/png" href="images/logo.png">
 
@@ -25,6 +28,7 @@
             --color-card-bg: rgba(30, 41, 59, 0.5);
             --shadow-subtle: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
             --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+            --cart-width: 350px;
         }
         
         * {
@@ -39,10 +43,8 @@
             color: var(--color-text);
             line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
-        
+
         /* Reusable CTA Button */
         .btn {
             background-color: var(--color-primary);
@@ -66,7 +68,7 @@
         }
 
         /* =========================================================
-        HEADER & NAVIGATION (Fixes the logo size issue)
+        HEADER & NAVIGATION
         =========================================================
         */
         .header-main {
@@ -83,12 +85,9 @@
             box-shadow: var(--shadow-subtle);
             border-bottom: var(--border-glass);
         }
-        
-        /* --- CRITICAL FIX: Defines logo size --- */
         .header-main img {
-            height: 50px; 
+            height: 50px;
         }
-        /* -------------------------------------- */
 
         .nav-links {
             list-style: none;
@@ -110,129 +109,205 @@
             text-shadow: 0 0 8px var(--color-accent); 
         }
 
+        /* Cart Icon in Header */
+        .cart-icon-btn {
+            position: relative;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 30px;
+            transition: color 0.3s;
+        }
+        .cart-icon-btn:hover {
+            color: var(--color-primary);
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            min-width: 24px;
+            text-align: center;
+        }
+
         /* =========================================================
-        CHECKOUT LAYOUT
+        MAIN PRODUCT GRID
         =========================================================
         */
-        .checkout-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr; /* Checkout form and Order Summary */
-            gap: 40px;
+        .product-container {
             padding: 50px 5vw;
-            flex-grow: 1;
-        }
-
-        .checkout-main h1 {
-            font-size: 2.5rem;
-            color: var(--color-accent);
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--color-primary);
-            padding-bottom: 10px;
-        }
-
-        /* Form Styling */
-        .checkout-form {
-            background: var(--color-card-bg);
-            border: var(--border-glass);
-            border-radius: 8px;
-            padding: 30px;
-        }
-
-        .checkout-form h2 {
-            font-size: 1.3rem;
-            color: var(--color-primary);
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--color-primary);
-        }
-
-        input[type="text"], 
-        input[type="email"], 
-        input[type="tel"],
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--color-text);
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-        input:focus {
-            border-color: var(--color-accent);
-            outline: none;
-            box-shadow: 0 0 5px rgba(233, 255, 112, 0.5);
         }
         
-        /* Two-column layout within the form */
-        .form-row {
+        .product-container h1 {
+            font-size: 3rem;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .product-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding-bottom: 50px;
         }
 
-        .place-order-btn {
-            width: 100%;
-            margin-top: 20px;
-            padding: 18px 0;
-            font-size: 1.1rem;
-        }
-
-
-        /* Order Summary Sidebar */
-        .order-summary {
-            background: #1e2937;
-            border-radius: 10px;
-            padding: 25px;
+        .product-card {
+            background: var(--color-card-bg);
+            border: var(--border-glass);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            backdrop-filter: blur(5px);
             box-shadow: var(--shadow-subtle);
-            height: fit-content;
+            transition: transform 0.3s;
         }
-        .order-summary h2 {
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(26, 147, 111, 0.3);
+        }
+
+        .product-card img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .product-card h2 {
             font-size: 1.5rem;
             color: var(--color-primary);
-            border-bottom: 2px solid var(--color-accent);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        /* REQUIRED ID: for JS to inject items */
-        #summary-items {
-            min-height: 100px;
-            margin-bottom: 20px;
-        }
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
+        .product-card p {
+            color: var(--color-text);
+            margin-bottom: 15px;
             font-size: 0.95rem;
         }
-        .item-qty {
+
+        .product-card .price {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 600;
             color: var(--color-accent);
-            margin-right: 10px;
+            margin-bottom: 20px;
         }
-        .total-line {
+        
+        /* Specific button style for adding to cart */
+        .add-to-cart-btn {
+            background-color: var(--color-secondary);
+            font-size: 1rem;
+            width: 100%;
+            padding: 12px 0;
+        }
+        .add-to-cart-btn:hover {
+            background-color: var(--color-primary);
+        }
+
+        /* =========================================================
+        SHOPPING CART SIDEBAR
+        =========================================================
+        */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: calc(0 - var(--cart-width)); /* Start off-screen */
+            width: var(--cart-width);
+            height: 100%;
+            background: #1e2937;
+            box-shadow: -10px 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            padding: 20px;
+            transition: right 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--color-primary);
+        }
+
+        .cart-sidebar.open {
+            right: 0; /* Slide in */
+        }
+
+        .cart-header {
             display: flex;
             justify-content: space-between;
-            font-size: 1.3rem;
-            font-weight: 700;
+            align-items: center;
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .cart-header h3 {
+            color: var(--color-primary);
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-btn:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Cart Items Display Area */
+        #cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        .cart-item span:first-child {
+            max-width: 60%;
+        }
+
+        .cart-summary {
             margin-top: 20px;
-            padding-top: 15px;
+            padding-top: 20px;
             border-top: 2px solid var(--color-primary);
         }
-        .total-line strong {
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .cart-total-row strong {
             color: var(--color-accent);
         }
 
+        /* CRITICALLY CORRECTED LINK STYLE */
+        .checkout-btn {
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+        }
+        
         /* FOOTER */
         footer {
             padding: 30px 5vw;
@@ -242,16 +317,25 @@
             background: rgba(0, 0, 0, 0.15);
             color: var(--color-text);
             font-size: 0.85rem;
-            margin-top: auto; 
         }
 
         /* MEDIA QUERIES */
-        @media (max-width: 900px) {
-            .checkout-grid {
-                grid-template-columns: 1fr;
+        @media (max-width: 600px) {
+            .header-main {
+                padding: 10px 4vw;
             }
-            .form-row {
-                grid-template-columns: 1fr;
+            .header-main img {
+                height: 40px;
+            }
+            .nav-links li {
+                margin-left: 15px;
+            }
+            .cart-sidebar {
+                width: 100%; /* Cart takes full width on small screens */
+                --cart-width: 100%;
+            }
+            .product-container h1 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -268,93 +352,106 @@
                 <li><a href="products.html">Products</a></li>
                 <li><a href="science.html">Science</a></li>
                 <li><a href="community.html">Community</a></li>
-                <li><a href="checkout.html" class="btn">Checkout</a></li>
+                <!-- Cart Icon Button -->
+                <li>
+                    <button class="cart-icon-btn" id="toggle-cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
 
-    <!-- Checkout Main Grid -->
-    <main class="checkout-grid">
+    <!-- Main Content: Product Grid -->
+    <main class="product-container">
+        <h1>Essential VYTE Supplements</h1>
         
-        <!-- A. Checkout Form -->
-        <section class="checkout-main">
-            <h1>Finalize Your Order</h1>
+        <div class="product-grid">
             
-            <form class="checkout-form" id="checkout-form">
-                
-                <!-- Contact Information -->
-                <h2>1. Contact & Shipping</h2>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" required>
-                    </div>
-                </div>
+            <!-- Product 1: VYTE Daily Greens -->
+            <div class="product-card">
+                <img src="https://placehold.co/250x250/1A936F/E9FF70?text=Daily+Greens" onerror="this.src='https://placehold.co/250x250/1A936F/E9FF70?text=Daily+Greens'" alt="VYTE Daily Greens">
+                <h2>VYTE Daily Greens</h2>
+                <p>The foundation of a balanced life. 30 servings of phytonutrients, antioxidants, and digestive enzymes.</p>
+                <div class="price">$49.99</div>
+                <button class="btn add-to-cart-btn" data-product-id="1">Add to Cart</button>
+            </div>
 
-                <!-- Shipping Address -->
-                <div class="form-group">
-                    <label for="address">Street Address</label>
-                    <input type="text" id="address" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" id="city" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="zip">Zip/Postal Code</label>
-                        <input type="text" id="zip" required>
-                    </div>
-                </div>
+            <!-- Product 2: Cogni-Boost Nootropics -->
+            <div class="product-card">
+                <img src="https://placehold.co/250x250/0077B6/EAEAEA?text=Cogni-Boost" onerror="this.src='https://placehold.co/250x250/0077B6/EAEAEA?text=Cogni-Boost'" alt="Cogni-Boost Nootropics">
+                <h2>Cogni-Boost Nootropics</h2>
+                <p>Enhance focus and mental clarity with our blend of Lion's Mane and B-vitamins for optimal brain health.</p>
+                <div class="price">$34.50</div>
+                <button class="btn add-to-cart-btn" data-product-id="2">Add to Cart</button>
+            </div>
 
-                <!-- Payment Placeholder -->
-                <h2 style="margin-top: 40px;">2. Payment Details</h2>
-                <div class="form-group">
-                    <label>Payment Method (Placeholder)</label>
-                    <p style="color: var(--color-accent); font-size: 0.9rem;">
-                        [Integration required for live payment processing.]
-                    </p>
-                </div>
+            <!-- Product 3: Restorative Magnesium -->
+            <div class="product-card">
+                <img src="https://placehold.co/250x250/931A93/E9FF70?text=Restorative+Mg" onerror="this.src='https://placehold.co/250x250/931A93/E9FF70?text=Restorative+Mg'" alt="Restorative Magnesium Glycinate">
+                <h2>Restorative Magnesium</h2>
+                <p>High-absorption magnesium glycinate for muscle recovery and deep, restful sleep.</p>
+                <div class="price">$22.00</div>
+                <button class="btn add-to-cart-btn" data-product-id="3">Add to Cart</button>
+            </div>
 
-                <!-- Submission Button -->
-                <button type="submit" class="btn place-order-btn">Place Order & Sync Vitality</button>
-            </form>
-        </section>
-
-        <!-- B. Order Summary Sidebar -->
-        <aside class="order-summary">
-            <h2>Order Summary</h2>
-            
-            <!-- REQUIRED ID: Items will be injected here by JavaScript -->
-            <div id="summary-items">
-                <!-- Default loading text will be replaced by script.js -->
-                <p class="empty-cart-message" style="opacity:1;">Loading cart...</p>
+            <!-- Product 4: Endurance Pre-Workout -->
+            <div class="product-card">
+                <img src="https://placehold.co/250x250/FF7070/111827?text=Pre-Workout" onerror="this.src='https://placehold.co/250x250/FF7070/111827?text=Pre-Workout'" alt="Endurance Pre-Workout Mix">
+                <h2>Endurance Pre-Workout</h2>
+                <p>Clean energy and sustained focus without the jitters. Fuel your workouts naturally.</p>
+                <div class="price">$39.99</div>
+                <button class="btn add-to-cart-btn" data-product-id="4">Add to Cart</button>
             </div>
             
-            <div class="total-line">
-                <span>ORDER TOTAL:</span>
-                <!-- REQUIRED ID: Total will be updated here by JavaScript -->
-                <strong>$<span id="checkout-total">0.00</span></strong>
-            </div>
-        </aside>
-
+        </div>
     </main>
+    
+    <!-- Cart Sidebar -->
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Vitality Cart</h3>
+            <button class="close-btn" id="close-cart-btn">&times;</button>
+        </div>
+        
+        <!-- Area where cart items are rendered by script.js -->
+        <div id="cart-items">
+            <p class="text-sm text-gray-400 p-4">Loading cart...</p>
+        </div>
+
+        <div class="cart-summary">
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <!-- ID for JavaScript to update the total -->
+                <strong>$<span id="cart-total">0.00</span></strong>
+            </div>
+            
+            <!-- CRITICALLY CORRECTED LINK: Points to checkout.html -->
+            <a href="checkout.html" class="btn checkout-btn">Proceed to Checkout</a>
+        </div>
+    </aside>
 
     <!-- Footer -->
     <footer>
         <p>Nature's VYTE © 2025. Backed by Science, Inspired by Nature.</p>
     </footer>
 
-    <!-- JavaScript Link -->
+    <!-- JavaScript Link (Must be at the end) -->
     <script src="script.js"></script>
+    <script>
+        // JS for sidebar toggle functionality
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const toggleCartBtn = document.getElementById('toggle-cart-btn');
+        const closeCartBtn = document.getElementById('close-cart-btn');
+
+        toggleCartBtn.addEventListener('click', () => {
+            cartSidebar.classList.toggle('open');
+        });
+
+        closeCartBtn.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+        });
+    </script>
 </body>
 </html>
