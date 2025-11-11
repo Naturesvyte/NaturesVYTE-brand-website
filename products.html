@@ -1,52 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products – NaturesVYTE</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Nature's VYTE's science-backed supplement formulas: MegaCreatine and Women's Health. Pure, potent, and ready to shop.">
+    <title>Nature's VYTE | Products</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <style>
+        /* =========================================================
+        CORE STYLING & VARIABLES
+        =========================================================
+        */
+        :root {
+            --color-primary: #1A936F; 
+            --color-secondary: #0077B6;
+            --color-accent: #E9FF70;
+            --color-bg: #111827; 
+            --color-text: #EAEAEA;
+            --color-card-bg: rgba(30, 41, 59, 0.5);
+            --shadow-subtle: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Reusable CTA Button */
+        .btn {
+            background-color: var(--color-primary);
+            color: var(--color-bg); 
+            padding: 10px 25px; 
+            border: none;
+            border-radius: 4px; 
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 119, 182, 0.5);
+        }
+        
+        /* =========================================================
+        HEADER & NAVIGATION (Consistent across all pages)
+        =========================================================
+        */
+        .header-main {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5vw;
+            background: var(--color-card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-subtle);
+            border-bottom: var(--border-glass);
+        }
+        .header-main img {
+            height: 50px; 
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .nav-links li {
+            margin-left: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--color-accent);
+            text-shadow: 0 0 8px var(--color-accent); 
+        }
+        #mobile-menu {
+            display: none; 
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-accent);
+        }
+
+        /* =========================================================
+        PRODUCT PAGE LAYOUT
+        =========================================================
+        */
+        .main-content-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr; /* 3 parts products, 1 part cart */
+            gap: 30px;
+            padding: 50px 5vw;
+        }
+
+        /* Product List Area */
+        #product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--color-card-bg);
+            border: var(--border-glass);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 119, 182, 0.3);
+        }
+        .product-card img {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(233, 255, 112, 0.4));
+        }
+        .product-card h4 {
+            font-size: 1.8rem;
+            color: var(--color-accent);
+            margin-bottom: 10px;
+        }
+        .product-card p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+        .product-description {
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 25px !important;
+            color: var(--color-text);
+        }
+
+        /* Shopping Cart Sidebar */
+        .cart-sidebar {
+            background: #1e2937;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow-subtle);
+            position: sticky;
+            top: 80px; /* Offset from sticky header */
+            height: fit-content;
+        }
+        .cart-sidebar h3 {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Cart Items Display */
+        #cart-items {
+            min-height: 100px;
+            margin-bottom: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        .item-name {
+            font-weight: 500;
+            flex-grow: 1;
+        }
+        .item-qty {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--color-accent);
+            margin: 0 15px;
+        }
+        .item-price {
+            font-weight: 700;
+        }
+        .empty-cart-message {
+            font-style: italic;
+            text-align: center;
+            opacity: 0.6;
+            padding-top: 20px;
+        }
+
+        /* Cart Total */
+        .cart-total-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid var(--color-primary);
+        }
+        .cart-total-line strong {
+            color: var(--color-accent);
+        }
+        .checkout-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px 0;
+            font-size: 1rem;
+        }
+
+
+        /* =========================================================
+        FOOTER (Consistent)
+        =========================================================
+        */
+        footer {
+            padding: 30px 5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.15);
+            color: var(--color-text);
+            font-size: 0.85rem;
+            margin-top: auto; 
+        }
+
+        /* =========================================================
+        MEDIA QUERIES (Responsiveness)
+        =========================================================
+        */
+        @media (max-width: 1000px) {
+            .main-content-grid {
+                grid-template-columns: 2fr 1fr; /* Adjust ratio slightly */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-main {
+                flex-wrap: wrap;
+            }
+            .nav-links {
+                display: none; 
+                width: 100%;
+                flex-direction: column;
+                background: var(--color-card-bg);
+                padding: 10px 0;
+                margin-top: 10px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+            #mobile-menu {
+                display: block;
+            }
+            
+            .main-content-grid {
+                grid-template-columns: 1fr; /* Stack products and cart vertically */
+                padding: 30px 4vw;
+            }
+            .cart-sidebar {
+                position: static; /* Unstick the cart sidebar on mobile */
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo"><img src="images/logo.png" alt="NaturesVYTE Logo"></div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div id="mobile-menu">&#9776;</div>
-    </nav>
-  </header>
+    <header class="header-main">
+        <a href="index.html"><img src="images/logo.png" alt="Nature's VYTE Logo"></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li> 
+                <li><a href="products.html">Products</a></li>
+                <li><a href="science.html">Science</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html" class="btn">Shop Now</a></li>
+            </ul>
+            <div id="mobile-menu">&#9776;</div>
+        </nav>
+    </header>
 
-  <section class="products-page">
-    <h1>Our Products</h1>
-    <div class="products-grid">
-      <div class="product-card">
-        <img src="images/product1.jpg" alt="Vitamin Boost">
-        <h3>Vitamin Boost</h3>
-        <p>$29.99 – Essential vitamins to start your day right.</p>
-        <button class="btn add-to-cart" data-name="Vitamin Boost" data-price="29.99" data-price-id="PRICE_ID_VITAMIN">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <img src="images/product2.jpg" alt="Immunity Plus">
-        <h3>Immunity Plus</h3>
-        <p>$39.99 – Strengthen your immunity naturally.</p>
-        <button class="btn add-to-cart" data-name="Immunity Plus" data-price="39.99" data-price-id="PRICE_ID_IMMUNITY">Add to Cart</button>
-      </div>
-      <!-- Add more products here -->
-    </div>
-  </section>
+    <main class="main-content-grid">
+        
+        <section class="products-area">
+            <h1>Our Formulas</h1>
+            <p style="margin-bottom: 30px; color: var(--color-primary); font-family: 'IBM Plex Mono', monospace;">Clinically Formulated. Purely Potent. Get Your VYTE.</p>
 
-  <section class="shopping-cart">
-    <h2>Your Cart</h2>
-    <ul id="cart-items"></ul>
-    <p>Total: $<span id="cart-total">0.00</span></p>
-    <button class="btn" id="checkout-btn">Checkout</button>
-  </section>
+            <section id="product-list">
+                </section>
+        </section>
 
-  <script src="https://js.stripe.com/v3/"></script>
-  <script src="js/script.js"></script>
+        <aside class="cart-sidebar">
+            <h3>🛒 Shopping Cart</h3>
+            
+            <div id="cart-items">
+                <p class="empty-cart-message">Your vitality sync is pending. Add a formula!</p>
+            </div>
+            
+            <div class="cart-total-line">
+                <span>TOTAL:</span>
+                <strong>$<span id="cart-total">0.00</span></strong>
+            </div>
+            
+            <a href="contact.html" class="btn checkout-btn">Proceed to Checkout</a>
+        </aside>
+
+    </main>
+
+    <footer>
+        <p>Nature's VYTE © 2025. Backed by Science, Inspired by Nature.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        });
+    </script>
+    
+    <script src="script.js"></script>
 </body>
 </html>
