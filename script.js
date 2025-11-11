@@ -59,6 +59,7 @@ function addToCart(productId) {
     if (cartItem) {
         cartItem.quantity += 1;
     } else {
+        // Only store necessary data in the cart
         cart.push({
             id: product.id,
             name: product.name,
@@ -71,6 +72,7 @@ function addToCart(productId) {
     // Check if the sidebar exists (only on products.html)
     if (document.getElementById('cart-items')) {
         renderCartSidebar();
+        alertBox.show(`${product.name} added to cart!`, 'success');
     }
 }
 
@@ -84,6 +86,7 @@ function renderCartSidebar() {
     const cartTotalEl = document.getElementById('cart-total');
     const cartCountEl = document.getElementById('cart-count');
 
+    // CRITICAL CHECK: ensure all required elements exist
     if (!cartItemsEl || !cartTotalEl || !cartCountEl) return;
 
     cartItemsEl.innerHTML = '';
@@ -123,7 +126,7 @@ function renderCheckoutSummary() {
     const summaryItemsEl = document.getElementById('summary-items');
     const checkoutTotalEl = document.getElementById('checkout-total');
     
-    // Safety check to ensure we are on the correct page and the elements exist
+    // CRITICAL CHECK: Check for IDs that exist *only* on checkout.html
     if (!summaryItemsEl || !checkoutTotalEl) {
         console.warn("Checkout summary elements not found. Not rendering.");
         return;
@@ -133,7 +136,8 @@ function renderCheckoutSummary() {
     let total = 0;
 
     if (cart.length === 0) {
-        summaryItemsEl.innerHTML = '<p style="color: #E9FF70; font-style: italic;">Your cart is empty. Please return to the products page to select items.</p>';
+        // This replaces the "Loading cart..." message with an empty state
+        summaryItemsEl.innerHTML = '<p style="color: #E9FF70; font-style: italic; padding: 1rem;">Your cart is empty. Please return to the products page to select items.</p>';
     } else {
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
@@ -165,12 +169,12 @@ function initPage() {
 
     const path = window.location.pathname;
 
-    // Check if we are on the products page
+    // 1. PRODUCTS PAGE LOGIC (Handling Add to Cart)
     if (path.includes('products.html')) {
-        console.log("Initializing Products Page.");
+        console.log("Initializing Products Page: Setting up listeners and sidebar.");
         renderCartSidebar();
         
-        // Add event listeners to all 'Add to Cart' buttons
+        // This attaches the listeners that were failing to fire
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
             button.addEventListener('click', (e) => {
                 const productId = parseInt(e.target.dataset.productId);
@@ -178,10 +182,10 @@ function initPage() {
             });
         });
 
-    // Check if we are on the checkout page
+    // 2. CHECKOUT PAGE LOGIC (Handling Load Cart Issue)
     } else if (path.includes('checkout.html')) {
-        console.log("Initializing Checkout Page.");
-        // This is the critical line that populates the summary
+        console.log("Initializing Checkout Page: Rendering Summary.");
+        // This is the CRITICAL call that replaces "Loading cart..."
         renderCheckoutSummary();
 
         // Optional: Handle form submission for checkout (placeholder)
@@ -189,11 +193,10 @@ function initPage() {
         if (checkoutForm) {
             checkoutForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                // In a real app, this is where you'd send data to the server and process payment
                 alertBox.show('Thank you! Your order has been placed successfully!', 'success');
-                cart = []; // Clear cart upon successful order
+                cart = []; 
                 saveCart();
-                renderCheckoutSummary(); // Re-render to show empty cart
+                renderCheckoutSummary();
             });
         }
     }
